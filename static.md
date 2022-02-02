@@ -1,4 +1,4 @@
-# Metrics server configuration
+# Static server configuration
   * [Node Exporter](#node-exporter)
   * [Nginx](#nginx)
 
@@ -39,3 +39,4 @@ sudo systemctl start node_exporter
 sudo systemctl status node_exporter
 sudo systemctl enable node_exporter
 ```
+## Nginx
