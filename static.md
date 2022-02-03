@@ -6,15 +6,16 @@
     + [Nginx VTS](#nginx-vts)
     + [GeoIP](#geoip)
   * [Install dependencies](#install-dependencies)
-  * [Install Nginx PHP-FPM](#install-nginx-php-fpm)
+  * [Install Nginx](#install-nginx)
+    + [PHP-FPM](#php-fpm)
     + [RE-Compile Nginx with modules](#re-compile-nginx-with-modules)
   * [Configure Nginx](#configure-nginx)
-  * [Server blocks](#server-blocks)
+    + [Server blocks](#server-blocks)
   * [SSl](#ssl)
     + [TLS1.3 HTTP2](#tls13-http2)
   * [Final checklist](#final-checklist)
     + [Nginx](#nginx)
-    + [PHP-FPM](#php-fpm)
+    + [PHP-FPM](#php-fpm-1)
     + [HTTP2 check](#http2-check)
     + [TLS1.3 check](#tls13-check)
     + [Brotli check](#brotli-check)
@@ -110,7 +111,7 @@ apt install -y libpcre3 libpcre3-dev zlib1g zlib1g-dev openssl libssl-dev
 ```
 apt install nginx
 ```
-## PHP-FPM
+### PHP-FPM
 ```
 apt install php-fpm
 apt-get install php7.4-gd
@@ -193,7 +194,7 @@ Restart nginx
 nginx -t
 systemctl restart nginx
 ```
-## Server blocks
+### Server blocks
 Remove default server block
 ```
 rm /etc/nginx/sites-available/default
