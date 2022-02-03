@@ -110,6 +110,9 @@ apt install -y libpcre3 libpcre3-dev zlib1g zlib1g-dev openssl libssl-dev
 ```
 apt install nginx
 apt install php-fpm
+apt-get install php7.4-gd
+apt-get install php7.4-curl
+
 ```
 ### RE-Compile Nginx with modules
 ```
