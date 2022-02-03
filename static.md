@@ -163,6 +163,9 @@ load_module modules/ngx_http_geoip2_module.so;
 ```
 Paste to http section:
 ```
+# Hide Nginx version from response header
+server_tokens off;
+
 # Nginx Vhost Traffic Status
 vhost_traffic_status_zone;
 
