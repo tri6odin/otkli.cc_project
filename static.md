@@ -1,4 +1,5 @@
 # Static server configuration
+  * [Change Name](#change-name)
   * [Node Exporter](#node-exporter)
   * [Nginx modules](#nginx-modules)
     + [Brotli](#brotli)
@@ -8,7 +9,21 @@
   * [Install Nginx PHP-FPM](#install-nginx-php-fpm)
     + [RE-Compile Nginx with modules](#re-compile-nginx-with-modules)
   * [Configure Nginx](#configure-nginx)
-
+  * [Server blocks](#server-blocks)
+  * [SSl](#ssl)
+    + [TLS1.3 HTTP2](#tls13-http2)
+  * [Final checklist](#final-checklist)
+    + [Nginx](#nginx)
+    + [PHP-FPM](#php-fpm)
+    + [HTTP2 check](#http2-check)
+    + [TLS1.3 check](#tls13-check)
+    + [Brotli check](#brotli-check)
+    + [Node exporter check](#node-exporter-check)
+    + [VTS check](#vts-check)
+## Change Name
+```
+hostnamectl set-hostname ___new_name___
+```
 ## Node Exporter
 Add app user:
 ```
@@ -16,9 +31,10 @@ useradd --no-create-home --shell /bin/false node_exporter
 ```
 Find new release here: https://github.com/prometheus/node_exporter/releases
 ```
-wget https://github.com/.../node_exporter-0.17.0.linux-amd64.tar.gz
-tar -xvzf node_exporter-0.17.0.linux-amd64.tar.gz
-cp node_exporter-0.17.0.linux-amd64/node_exporter /usr/local/bin/
+cd /tmp
+wget https://github.com/prometheus/node_exporter/releases/download/v1.3.1/node_exporter-1.3.1.linux-amd64.tar.gz
+tar -xvzf node_exporter-1.3.1.linux-amd64.tar.gz
+cp node_exporter-1.3.1.linux-amd64/node_exporter /usr/local/bin/
 ```
 Create service file:
 ```
@@ -50,13 +66,13 @@ systemctl enable node_exporter
 ### Brotli
 Download dynamic module:
 ```
-cd tmp
+cd /tmp
 git clone https://github.com/google/ngx_brotli --recursive
 ```
 ### Nginx VTS
 Download dynamic module:
 ```
-cd tmp
+cd /tmp
 git clone git://github.com/vozlt/nginx-module-vts.git
 ```
 ### GeoIP
@@ -65,6 +81,7 @@ Installing the geoipupdate package and these dependencies:
 add-apt-repository ppa:maxmind/ppa
 apt update
 apt install libmaxminddb0 libmaxminddb-dev mmdb-bin
+apt install geoipupdate
 ```
 You need to create an account on the MaxMind website which provides these databases. After registering on the site, you can now generate new license key.
 In the /etc/GeoIP.conf file, you can now replace YOUR_ACCOUNT_ID_HERE and YOUR_LICENSE_KEY_HERE:
@@ -77,7 +94,7 @@ geoipupdate
 ```
 Download dynamic module:
 ```
-cd tmp
+cd /tmp
 git clone https://github.com/leev/ngx_http_geoip2_module.git
 ```
 ## Install dependencies
@@ -85,39 +102,9 @@ C compiler
 ```
 apt-get install build-essential
 ```
-**MAYBE U CAN USE THIS**
+PCRE & Zlib & OpenSSL
 ```
 apt install -y libpcre3 libpcre3-dev zlib1g zlib1g-dev openssl libssl-dev
-```
-PCRE **ONLY 8.44**
-```
-cd tmp
-wget https://deac-ams.dl.sourceforge.net/project/pcre/pcre/8.44/pcre-8.44.tar.gz
-tar -zxf pcre-8.44.tar.gz
-cd pcre-8.44
-./configure
-make
-make install
-```
-Zlib
-```
-cd tmp
-wget http://zlib.net/zlib-1.2.11.tar.gz
-tar -zxf zlib-1.2.11.tar.gz
-cd zlib-1.2.11
-./configure
-make
-make install
-```
-OpenSSL 
-```
-cd tmp
-wget http://www.openssl.org/source/openssl-1.1.1g.tar.gz
-tar -zxf openssl-1.1.1g.tar.gz
-cd openssl-1.1.1g
-./Configure darwin64-x86_64-cc --prefix=/usr
-make
-make install
 ```
 ## Install Nginx PHP-FPM
 ```
@@ -126,7 +113,7 @@ apt install php-fpm
 ```
 ### RE-Compile Nginx with modules
 ```
-cd tmp
+cd /tmp
 wget http://nginx.org/download/nginx-VERSION.tar.gz
 tar zxvf nginx-VERSION.tar.gz
 cd nginx-VERSION
@@ -135,6 +122,7 @@ make && make install
 ```
 Move modules
 ```
+cd /usr/local/nginx/modules
 mv ngx_http_brotli_filter_module.so /usr/share/nginx/modules
 mv ngx_http_brotli_static_module.so /usr/share/nginx/modules
 mv ngx_http_geoip2_module.so /usr/share/nginx/modules
@@ -143,7 +131,7 @@ mv ngx_http_vhost_traffic_status_module.so /usr/share/nginx/modules
 ## Configure Nginx
 Open conf file:
 ```
-nano etc/nginx/nginx.conf
+nano /etc/nginx/nginx.conf
 ```
 Рaste to root section:
 ```
@@ -194,6 +182,77 @@ Restart nginx
 nginx -t
 systemctl restart nginx
 ```
+## Server blocks
+Remove default server block
+```
+rm /etc/nginx/sites-available/default
+rm /etc/nginx/sites-enabled/default
+```
+Create new server blocks
+```
+mkdir -p /var/www/your_domain/html
+chown -R $USER:$USER /var/www/your_domain/html
+chmod -R 755 /var/www/your_domain
+```
+Create server block config for grab metrics
+```
+nano /etc/nginx/sites-available/status.your_domain
+```
+And paste
+```
+server
+{
+  #IP of monitoring server
+#  allow 3.70.142.178;
+  #IP of VPN
+ # allow 3.66.126.220;
+  #deny all;
+  server_name status.static.otkli.cc;
+  access_log off;
+  error_log off;
+  location / {
+    vhost_traffic_status_bypass_limit on;
+    vhost_traffic_status_bypass_stats on;
+    vhost_traffic_status_display;
+    vhost_traffic_status_display_format html;
+  }
+  location /node_exporter/
+  {
+    proxy_pass       http://localhost:9100/metrics;
+  }
+  location /prometheus/
+  {
+    proxy_pass       http://localhost/status/format/prometheus;
+  }
+}
+```
+Create server block config for grab metrics
+```
+nano /etc/nginx/sites-available/your_domain
+```
+And paste
+```
+server {
+        root /var/www/your_domain/html;
+        index index.html index.php index.py;
+
+        server_name your_domain;
+        
+        location / {
+                try_files $uri $uri/ =404;
+        }
+        location ~ \.php$ {
+                include 					snippets/fastcgi-php.conf;
+                fastcgi_pass 			unix:/var/run/php/php7.4-fpm.sock;
+				    }
+}
+```
+Create link
+```
+ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
+ln -s /etc/nginx/sites-available/status.your_domain /etc/nginx/sites-enabled/
+```
+
 ## SSl
 Let's Encrypt SSL for Nginx:
 ```
@@ -221,31 +280,43 @@ ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH
 ```
 
 
-
-Final check:
+## Final checklist
+### Nginx
 ```
 nginx -t
 systemctl restart nginx
 systemctl status nginx
 systemctl enable nginx
 ```
-HTTP2 check:
+### PHP-FPM
+```
+```
+### HTTP2 check
 ```
 curl -I -L https://your_domain
+curl -I -L https://status.your_domain
 ```
-TLS1.3 check:
+### TLS1.3 check
 ```
 openssl s_client -connect your_domain:443 -tls1_3
+openssl s_client -connect status.your_domain:443 -tls1_3
 ```
-Brotli check
+### Brotli check
 ```
 curl -IL https://your_domain -H "Accept-Encoding: br"
+curl -IL https://status.your_domain -H "Accept-Encoding: br"
 ```
-Node Exporter check
+### Node exporter check
 ```
-curl http://localhost:9100/metrics
+curl https://status.your_domain/node_metricks
 ```
-VTS check
+### VTS check
 ```
-curl http://localhost/status
+curl https://status.your_domain/prometheus
 ```
+
+
+
+
+
+
