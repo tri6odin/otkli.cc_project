@@ -106,13 +106,21 @@ PCRE & Zlib & OpenSSL
 ```
 apt install -y libpcre3 libpcre3-dev zlib1g zlib1g-dev openssl libssl-dev
 ```
-## Install Nginx PHP-FPM
+## Install Nginx
 ```
 apt install nginx
+```
+## PHP-FPM
+```
 apt install php-fpm
 apt-get install php7.4-gd
 apt-get install php7.4-curl
-
+sudo /etc/init.d/php7.4-fpm restart
+```
+If php read/write files, u need to take permission
+```
+chown -R www-data:www-data webp
+chown -R www-data:www-data temporary
 ```
 ### RE-Compile Nginx with modules
 ```
