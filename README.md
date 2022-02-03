@@ -56,6 +56,50 @@ sudo systemctl start prometheus
 sudo systemctl status prometheus
 sudo systemctl enable prometheus
 ```
+Edit config:
+```
+nano /etc/prometheus/prometheus.yml
+```
+And paste:
+```
+- job_name: 'frontend_vts'
+  scheme: https
+  metrics_path: /prometheus
+  static_configs:
+    - targets: ['status.otkli.cc']
+
+- job_name: 'frontend_node'
+  scheme: https
+  metrics_path: /node_exporter
+  static_configs:
+    - targets: ['status.otkli.cc']
+
+- job_name: 'static_vts'
+  scheme: https
+  metrics_path: /prometheus
+  static_configs:
+    - targets: ['status.static.otkli.cc']
+
+- job_name: 'static_node'
+  scheme: https
+  metrics_path: /node_exporter
+  static_configs:
+    - targets: ['status.static.otkli.cc']
+
+- job_name: 'proxy_vts'
+  scheme: https
+  metrics_path: /prometheus
+  static_configs:
+    - targets: ['status.proxy.otkli.cc']
+
+- job_name: 'proxy_node'
+  scheme: https
+  metrics_path: /node_exporter
+  static_configs:
+    - targets: ['status.proxy.otkli.cc']
+```      
+        
+        
 ## Grafana
 To install the latest Enterprise edition:
 ```
