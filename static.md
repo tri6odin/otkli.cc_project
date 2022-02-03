@@ -1,5 +1,5 @@
 # Static server configuration
-  * [Change Name](#change-name)
+  * [First steps](#first-steps)
   * [Node Exporter](#node-exporter)
   * [Nginx modules](#nginx-modules)
     + [Brotli](#brotli)
@@ -21,9 +21,18 @@
     + [Brotli check](#brotli-check)
     + [Node exporter check](#node-exporter-check)
     + [VTS check](#vts-check)
-## Change Name
+## First steps
+Go root:
+```
+sudo su
+```
+Change host name:
 ```
 hostnamectl set-hostname ___new_name___
+```
+Install Fail2ban:
+```
+apt-get install fail2ban
 ```
 ## Node Exporter
 Add app user:
