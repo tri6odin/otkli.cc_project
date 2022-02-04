@@ -1,10 +1,10 @@
 # Default Nginx server
-Nginx server with VTS (metrics export), GeoIP (detecting countries and cities from which requests come) and Brotli (modern compression algorithm) modules. 
-Metrics are collected by Prometheus and visualized by Grafana.
-Ubuntu endpoint metrics (Node exporter) -status.sefault_server.com/node_metrics
-Endpoint metrics Nginx (VTS exporter) -status.sefault_server.com/status/format/prometheus
+Nginx server with VTS (request/response metrics export), GeoIP (detecting countries and cities from which requests come) and Brotli (modern compression algorithm) modules. 
+Metrics are collected by Prometheus and visualized by Grafana([Installation instruction](https://github.com/tri6odin/otkli.cc_metrics)).
+Ubuntu endpoint metrics (Node exporter) – status.your_domain/node_metrics
+Endpoint metrics Nginx (VTS exporter) – status.your_domain/status/format/prometheus
 
-Nice little things: TLS1.3, HTTP2, Fail2Ban for maximum security, and PHP-FPM
+Nice little things: TLS1.3, HTTP2, Fail2Ban, hidden Nginx version in response headers for maximum security, and PHP-FPM.
 
   * [First steps](#first-steps)
   * [Node Exporter](#node-exporter)
@@ -136,8 +136,7 @@ sudo /etc/init.d/php7.4-fpm restart
 ```
 If php read/write files, u need to take permission
 ```
-chown -R www-data:www-data webp
-chown -R www-data:www-data temporary
+chown -R www-data:www-data your_directory
 ```
 ### RE-Compile Nginx with modules
 ```
@@ -233,14 +232,17 @@ And paste
 ```
 server
 {
-  #IP of monitoring server
-  allow 3.70.142.178;
-  #IP of VPN
-  allow 3.66.126.220;
+  #IP of your monitoring server
+  allow 1.1.1.1;
+  #IP of your VPN
+  allow 1.1.1.1;
   deny all;
-  server_name status.static.otkli.cc;
+  
+  server_name status.your_domain;
+  
   access_log off;
   error_log off;
+  
   location / {
     vhost_traffic_status_bypass_limit on;
     vhost_traffic_status_bypass_stats on;
@@ -261,17 +263,16 @@ And paste
 ```
 server {
         root /var/www/your_domain/html;
-        index index.html index.php index.py;
-
+        index index.html index.php;
         server_name your_domain;
         
         location / {
                 try_files $uri $uri/ =404;
         }
         location ~ \.php$ {
-                include 					snippets/fastcgi-php.conf;
-                fastcgi_pass 			unix:/var/run/php/php7.4-fpm.sock;
-				    }
+                include      snippets/fastcgi-php.conf;
+                fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+	}
 }
 ```
 Create link
@@ -287,7 +288,7 @@ apt install certbot python3-certbot-nginx
 ```
 Generate SSL config in block:
 ```
-certbot --nginx -d example.com
+certbot --nginx -d your_domain -d status.your_domain
 certbot renew --dry-run
 ```
 ### TLS1.3 HTTP2
@@ -339,7 +340,7 @@ curl https://status.your_domain/node_metricks
 ```
 ### VTS check
 ```
-curl https://status.your_domain/prometheus
+curl https://status.your_domain/status/format/prometheus
 ```
 
 
