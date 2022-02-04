@@ -141,9 +141,9 @@ chown -R www-data:www-data your_directory
 ### RE-Compile Nginx with modules
 ```
 cd /tmp
-wget http://nginx.org/download/nginx-VERSION.tar.gz
-tar zxvf nginx-VERSION.tar.gz
-cd nginx-VERSION
+wget http://nginx.org/download/nginx-1.18.0.tar.gz
+tar zxvf nginx-1.18.0.tar.gz
+cd nginx-1.18.0
 ./configure --add-dynamic-module=/tmp/nginx-module-vts --add-dynamic-module=/tmp/ngx_http_geoip2_module --add-dynamic-module=/tmp/ngx_brotli $(nginx -V) --with-compat
 make && make install
 ```
