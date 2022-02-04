@@ -227,10 +227,10 @@ And paste
 server
 {
   #IP of monitoring server
-#  allow 3.70.142.178;
+  allow 3.70.142.178;
   #IP of VPN
- # allow 3.66.126.220;
-  #deny all;
+  allow 3.66.126.220;
+  deny all;
   server_name status.static.otkli.cc;
   access_log off;
   error_log off;
@@ -243,10 +243,6 @@ server
   location /node_exporter/
   {
     proxy_pass       http://localhost:9100/metrics;
-  }
-  location /prometheus/
-  {
-    proxy_pass       http://localhost/status/format/prometheus;
   }
 }
 ```
