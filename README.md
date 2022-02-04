@@ -1,7 +1,21 @@
 # Metrics server configuration
+  * [First steps](#first-steps)
   * [Prometheus](#prometheus)
   * [Grafana](#grafana)
   * [Nginx](#nginx)
+## First steps
+Go root:
+```
+sudo su
+```
+Change host name:
+```
+hostnamectl set-hostname ___new_name___
+```
+Install Fail2ban:
+```
+apt-get install fail2ban
+```
 ## Prometheus
 Add app user:
 ```
@@ -64,7 +78,7 @@ And paste:
 ```
 - job_name: 'frontend_vts'
   scheme: https
-  metrics_path: /prometheus
+  metrics_path: /status/format/prometheus
   static_configs:
     - targets: ['status.otkli.cc']
 
@@ -76,7 +90,7 @@ And paste:
 
 - job_name: 'static_vts'
   scheme: https
-  metrics_path: /prometheus
+  metrics_path: /status/format/prometheus
   static_configs:
     - targets: ['status.static.otkli.cc']
 
@@ -88,7 +102,7 @@ And paste:
 
 - job_name: 'proxy_vts'
   scheme: https
-  metrics_path: /prometheus
+  metrics_path: /status/format/prometheus
   static_configs:
     - targets: ['status.proxy.otkli.cc']
 
@@ -133,15 +147,16 @@ nano /etc/nginx/sites-available/prometheus.otkli.cc
 ```
 And paste:
 ```
-upstream prometheus
-{
-  server 127.0.0.1:9090;
-}
 server {
+  #IP of monitoring server
+  allow 3.70.142.178;
+  #IP of VPN
+  allow 3.66.126.220;
+  deny all;
   server_name prometheus.otkli.cc;
   location /
     {
-      proxy_pass http://prometheus;
+      proxy_pass http://localhost:9090;
     }
 }
 ```
@@ -151,15 +166,16 @@ nano /etc/nginx/sites-available/grafana.otkli.cc
 ```
 And paste:
 ```
-upstream grafana
-{
-  server 127.0.0.1:3000;
-}
 server {
+  #IP of monitoring server
+  allow 3.70.142.178;
+  #IP of VPN
+  allow 3.66.126.220;
+  deny all;
   server_name grafana.otkli.cc;
   location /
     {
-      proxy_pass http://grafana;
+      proxy_pass http://localhost:3000;
     }
 }
 ```
