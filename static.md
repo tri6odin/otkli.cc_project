@@ -1,4 +1,4 @@
-# Static server configuration
+# Dafault Nginx server
   * [First steps](#first-steps)
   * [Node Exporter](#node-exporter)
   * [Nginx modules](#nginx-modules)
@@ -21,6 +21,13 @@
     + [Brotli check](#brotli-check)
     + [Node exporter check](#node-exporter-check)
     + [VTS check](#vts-check)
+
+Nginx server with VTS (metrics export), GeoIP (detecting countries and cities from which requests come) and Brotli (modern compression algorithm) modules. 
+Metrics are collected by Prometheus and visualized by Grafana.
+Ubuntu endpoint metrics (Node exporter) -status.sefault_server.com/node_metrics
+Endpoint metrics Nginx (VTS exporter) -status.sefault_server.com/status/format/prometheus
+
+Nice little things: TLS1.3 and HTTP2 for maximum security, Fail2Ban and PHP-FPM
 ## First steps
 Go root:
 ```
