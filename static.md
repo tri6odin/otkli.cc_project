@@ -1,8 +1,8 @@
 # Default Nginx server
-Nginx server with VTS (request/response metrics export), GeoIP (detecting countries and cities from which requests come) and Brotli (modern compression algorithm) modules. 
-Metrics are collected by Prometheus and visualized by Grafana([Installation instruction](https://github.com/tri6odin/otkli.cc_metrics)).
-Ubuntu endpoint metrics (Node exporter) – status.your_domain/node_metrics
-Endpoint metrics Nginx (VTS exporter) – status.your_domain/status/format/prometheus
+Nginx server with [VTS](https://github.com/vozlt/nginx-module-vts) (request/response metrics export), [GeoIP](https://github.com/leev/ngx_http_geoip2_module) (detecting countries and cities from which requests come) and [Brotli](https://github.com/google/ngx_brotli) (modern compression algorithm) modules. 
+Metrics are collected by [Prometheus](https://github.com/prometheus/prometheus) and visualized by [Grafana](https://github.com/grafana/grafana)([Server installation instruction](https://github.com/tri6odin/otkli.cc_metrics)).
+* Ubuntu endpoint metrics ([Node exporter](https://github.com/prometheus/node_exporter)) – status.your_domain/node_metrics
+* Endpoint metrics Nginx (VTS exporter) – status.your_domain/status/format/prometheus
 
 Nice little things: TLS1.3, HTTP2, Fail2Ban, hidden Nginx version in response headers for maximum security, and PHP-FPM.
 
@@ -100,7 +100,7 @@ apt update
 apt install libmaxminddb0 libmaxminddb-dev mmdb-bin
 apt install geoipupdate
 ```
-You need to create an account on the MaxMind website which provides these databases. After registering on the site, you can now generate new license key.
+You need to create an account on the [MaxMind website](https://www.maxmind.com/) which provides these databases. After registering on the site, you can now generate new license key.
 In the /etc/GeoIP.conf file, you can now replace YOUR_ACCOUNT_ID_HERE and YOUR_LICENSE_KEY_HERE:
 ```
 nano /etc/GeoIP.conf
