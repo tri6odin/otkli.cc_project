@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <title>OfferFlow – Найди работу без резюме</title>
+
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="initial-scale=1, minimum-scale=1, minimal-ui, maximum-scale=5">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="Description" content="">
+
+  <link rel="icon" href="https://static.otkli.cc/svg/favicon.svg">
+
+  <link rel="preconnect" href="https://static.otkli.cc">
+  <link rel="preconnect" href="https://apis.google.com">
+
+  <link rel="stylesheet" href="https://static.otkli.cc/css/vars.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/fonts.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/colorset.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/main.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/buttons.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/search.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/mobile.css" defer>
+
+
+</head>
+
+<body tabindex="0" id="main" style="height:100%">
+
+  <!--    overlay   -->
+
+  <overlay>
+  </overlay>
+
+  <!--    main page   -->
+
+
+  <top-nav>
+    <div>
+      <row class="xxs logo">
+        <a href="https://hr.otkli.cc" alt='Главная cтраница'><img src="https://static.otkli.cc/svg/logoimg.svg" alt="Логотип otkli.cc" class="logoimg"></a>
+        <a href="https://hr.otkli.cc" alt='Главная cтраница' class="hide-m"><img src="https://static.otkli.cc/svg/logotext.svg" alt="Текст логотипа otkli.cc" class="logotext"></a>
+      </row>
+      <row class="xs">
+      </row>
+    </div>
+  </top-nav>
+
+  <div id="myProgress">
+    <div id="myBar"></div>
+  </div>
+  <main style="padding:0px;">
+      <rightpanel class="standalone" style="height:100%;justify-content: flex-start;align-items:center;display:flex;flex-direction:column;padding:20px">
+      </rightpanel>
+  </main>
+
+  <input type="hidden" data-target="page" data-id="page" value="1" data-valid="true">
+  <input type="hidden" data-target="page_rows" data-id="page_rows" value="12" data-valid="true">
+  <input type="hidden" data-target="page_1" data-id="page_1" value="1" data-valid="true">
+  <input type="hidden" data-target="page_rows_1" data-id="page_rows_1" value="12" data-valid="true">
+  <input type="hidden" data-target="page_2" data-id="page_2" value="0" data-valid="true">
+  <input type="hidden" data-target="page_rows_2" data-id="page_rows_2" value="12" data-valid="true">
+  <input type="hidden" data-target="page_3" data-id="page_3" value="1" data-valid="true">
+  <input type="hidden" data-target="page_rows_3" data-id="page_rows_3" value="12" data-valid="true">
+  <input type="hidden" data-target="demand" data-id="demand" data-valid="true">
+
+  <template id='tmplBody'>
+    <banner-indicator style="width:auto">
+      <!--
+      <tag-xxs class="button-blue-dark">
+      </tag-xxs>
+    -->
+      <icon id="indicator_demand">
+      </icon>
+    </banner-indicator>
+    <p id="render_main_text" style="font-size:18px;font-weight:var(--semibold);width:100%;padding-bottom:20px;padding-top:16px"></p>
+    <column class="s" style="justify-content:flex-start;">
+      <column class="s" id='columncard'>
+      </column>
+    </column>
+    <tag-m id="loadmorebtn1" class="button-gray-light loadanimation" tabindex="0" style="margin-top:20px">
+          <p>Загрузить еще</p>
+          <icon class="i-down"></icon>
+          <img src="https://static.otkli.cc/svg/loader-rings.svg" height="38">
+    </tag-m>
+    <column class="xs"  style="padding-left:20px;padding-right:20px;margin-top:20px">
+      <row class="xs" style="margin-top:0px;width:100%">
+        <tag-l id="btnprev" class="button-purp-light" tabindex="0">
+          <icon class="i-backward"></icon>
+
+        </tag-l>
+        <tag-l id="btnnext" class="button-purp-light" tabindex="0">
+          <icon class="i-front"></icon>
+        </tag-l>
+      </row>
+      <tag-l id="loadmorebtn2" class="button-gray-contrast loadanimation" tabindex="0" onclick="loadMore2(this,'goA8IXXo');">
+        <b style="font-weight:var(--regular)">Оцененные отклики</b>
+        <icon class="i-front-down"></icon>
+        <img src="https://static.otkli.cc/svg/loader-rings.svg" height="38">
+      </tag-l>
+    </column>
+    <column class="s" style="justify-content:flex-start;display:none;margin-top:20px">
+      <column class="s"  id='columncard_archive'>
+      </column>
+    </column>
+    <tag-m class="button-gray-light loadanimation" tabindex="0" style="margin-top:20px;display:none" id="loadmorebtn2-2" onclick="loadMore2(this,'goA8IXXo');">
+          <p>Загрузить еще</p>
+          <icon class="i-down"></icon>
+          <img src="https://static.otkli.cc/svg/loader-rings.svg" height="38">
+    </tag-m>
+  </template>
+  <template id='tmplResponses'>
+
+    <column class="s fullwidth" style="border: 1px solid var(--gray-light);border-radius:var(--border-radius-sqr);background-color:white;padding:var(--len-s)">
+      <row class="s" style="align-items:center">
+        <a><img class="small" src="https://static.otkli.cc/svg/default-avatars/avatar-5.svg"></a>
+        <b></b>
+      </row>
+      <p></p>
+      <row class="xxs fullwidth" style="justify-content:flex-end">
+        <label tabindex="0" class="sqr-btn">
+          <input type="radio" name="1">
+          <tag-l class="checkbox-white button-white-dark" style="border: 1px solid var(--gray-light);">
+            <icon class="i-dislike-l" style="font-size: var(--font-ml);"></icon>
+          </tag-l>
+        </label>
+        <label tabindex="0" class="sqr-btn">
+          <input type="radio" name="1">
+          <tag-l class="checkbox-white button-white-dark" style="border: 1px solid var(--gray-light);">
+            <icon class="i-like-l" style="font-size: var(--font-ml);"></icon>
+          </tag-l>
+        </label>
+        <label tabindex="0" class="sqr-btn">
+          <input type="radio" name="1">
+          <tag-l class="checkbox-white button-white-dark" style="border: 1px solid var(--gray-light);">
+            <icon class="i-superlike-l" style="font-size: var(--font-ml);"></icon>
+          </tag-l>
+        </label>
+      </row>
+    </column>
+
+  </template>
+</body>
+<script src="https://static.otkli.cc/js/vars.js"></script>
+<script src="https://static.otkli.cc/js/scrolllockAndOverlay.js" defer></script>
+
+<script src="https://static.otkli.cc/js/AJAX.js" defer></script>
+<script src="https://static.otkli.cc/js/crawler.js" defer></script>
+
+<script src="https://static.otkli.cc/js/scripts.js" defer></script>
+<script src="https://static.otkli.cc/js/elements.js" defer></script>
+<script src="https://static.otkli.cc/js/auth.js" defer></script>
+
+<script src="https://static.otkli.cc/js/render/hr.otkli.cc/navbars.js" defer></script>
+<script src="https://static.otkli.cc/js/render/hr.otkli.cc/authform.js" defer></script>
+<script src="https://static.otkli.cc/js/render/hr.otkli.cc/scoring.js" defer></script>
+<!--<script src="https://static.otkli.cc/js/render/hr.otkli.cc/result.js" defer></script>-->
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://static.otkli.cc/js/googleauth.js" defer></script>
+
+<script src="https://unpkg.com/vconsole/dist/vconsole.min.js"></script>
+<script>
+  // VConsole will be exported to `window.VConsole` by default.
+  var vConsole = new window.VConsole();
+</script>
+</html>
