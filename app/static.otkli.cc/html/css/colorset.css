@@ -1,0 +1,109 @@
+input[type=checkbox]:checked+.checkbox-purp,input[type=radio]:checked+.checkbox-purp {
+  background-color: var(--purp);
+  color: #fff
+}
+input[type=checkbox]:checked+.checkbox-blue,input[type=radio]:checked+.checkbox-blue {
+  background-color: var(--blue-trans-dark);
+  color: #fff
+}
+input[type=checkbox]:checked+.checkbox-white,input[type=radio]:checked+.checkbox-white {
+  background-color: white;
+  color: var(--purp);
+}
+.button-purp-light {
+  background-color: var(--purp-trans-light);
+  color: var(--purp);
+}
+.button-white-dark {
+  background-color: white;
+  color: var(--gray-dark);
+}
+.button-purp-dark {
+  background-color: var(--purp);
+  color: var(--white);
+}
+.button-green-dark {
+  background-color: var(--green);
+  color: var(--white);
+}
+.button-purp-contrast {
+  background-color: var(--purp);
+  color: var(--white);
+  box-shadow: var(--input-outline-white);
+}
+
+.button-blue-light {
+  background-color: var(--blue-trans-light);
+  color: var(--blue);
+}
+
+.button-blue-dark {
+  background-color: var(--blue-trans-dark);
+  color: var(--white);
+}
+
+.button-blue-contrast {
+  background-color: var(--blue);
+  color: var(--white);
+  box-shadow: var(--input-outline-white);
+}
+
+.button-gray-light {
+  background-color: var(--gray-light);
+  color: var(--gray-dark);
+}
+.button-gray-bg {
+  background-color: var(--gray-bg);
+  color: var(--gray-dark);
+}
+.button-gray-dark {
+  background-color: var(--gray);
+  color: var(--white);
+}
+
+.button-gray-contrast {
+  background-color: var(--gray);
+  color: var(--white);
+  /*box-shadow: var(--input-outline-white);*/
+}
+
+.button-white-contrast {
+  background-color: var(--white);
+  color: var(--blue);
+  box-shadow: var(--input-outline-blue);
+  font-weight: var(--semibold)
+}
+.button-black-contrast {
+  background-color: var(--black);
+  color: var(--white);
+  box-shadow: var(--input-outline-white);
+  font-weight: var(--semibold)
+}
+.button-red-contrast {
+  background-color: var(--red);
+  color: var(--white);
+  box-shadow: var(--input-outline-white);
+  font-weight: var(--semibold)
+}
+.button-red-light {
+  background-color: var(--red-trans-light);
+  color: var(--red);
+  font-weight: var(--semibold)
+}
+.data-valid::before {
+  color: var(--green-color);
+}
+
+.button-white {
+  background-color: var(--white);
+  color: var(--gray);
+}
+
+.button-white + label {
+  background-color: var(--white);
+  color: var(--gray);
+}
+.button-white:checked + label {
+  color: var(--white);
+  background-color: var(--purp);
+}
