@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script type="text/javascript">
+
+
+  </script>
+</head>
+
+<body style="display:flex;flex-direction:column;width:600px;">
+  <div style="display:flex;flex-direction:row;width:100%">
+    <div>
+      <div>
+        <input type="radio" id="auth" name="endpoint" value="https://api.otkli.cc:8080/v1.0/auth">
+        <label for="auth">auth</label>
+      </div>
+      <div>
+        <input type="radio" id="profile" name="endpoint" value="https://api.otkli.cc:8080/v1.0/profile">
+        <label for="profile">profile</label>
+      </div>
+      <div>
+        <input type="radio" id="company" name="endpoint" value="https://api.otkli.cc:8080/v1.0/company">
+        <label for="company">company</label>
+      </div>
+      <div>
+        <input type="radio" id="vacancy" name="endpoint" value="https://api.otkli.cc:8080/v1.0/vacancy">
+        <label for="vacancy">vacancy</label>
+      </div>
+      <div>
+        <input type="radio" id="groups" name="endpoint" value="https://api.otkli.cc:8080/v1.0/groups">
+        <label for="groups">groups</label>
+      </div>
+      <div>
+        <input type="radio" id="search" name="endpoint" value="https://api.otkli.cc:8080/v1.0/search">
+        <label for="search">search</label>
+      </div>
+      <div>
+        <input type="radio" id="scoring" name="endpoint" value="https://api.otkli.cc:8080/v1.0/scoring">
+        <label for="scoring">scoring</label>
+      </div>
+      <div>
+        <input type="radio" id="result" name="endpoint" value="https://api.otkli.cc:8080/v1.0/result">
+        <label for="result">result</label>
+      </div>
+      <div>
+        <input type="radio" id="feed" name="endpoint" value="https://api.otkli.cc:8080/v1.0/feed">
+        <label for="feed">feed</label>
+      </div>
+      <div>
+        <input type="radio" id="fav" name="endpoint" value="https://api.otkli.cc:8080/v1.0/fav">
+        <label for="fav">fav</label>
+      </div>
+    </div>
+    <div>
+      <div>
+        <input type="radio" id="adm" name="jwt"
+          value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjI3MDg3MTcsInN1YiI6IjJmZWY2YzhhLWI3NDYtNDQ5NC04NzI3LTRhMmJlZTFlOGRkOCIsImNvZGUiOiJhZG0iLCJlbWFpbCI6ImFkbUBvdGtsaS5jYyIsInV0eXBlIjoiQURNIn0.Q5jiB4JnogP9QSxS9YF2tE_e7wWF6_eUr4HJCSJKCtM">
+        <label for="adm">ADM</label>
+      </div>
+      <div>
+        <input type="radio" id="cus" name="jwt"
+          value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjYwMDM3NTgsInN1YiI6IjJmNWFmMTAxLWFhNDQtNDM2NC1iYWYyLTJkZWZlMDdiYmYxZCIsImNvZGUiOiJnbnRscEV2YiIsImVtYWlsIjoidHJpNm9kaW5AZ21haWwuY29tIiwidXR5cGUiOiJDVVMifQ.ISAO6Er2XkV9COOwIwEiLSoxFAHZy2HIT_G54S50V_U">
+        <label for="cus">CUS</label>
+      </div>
+      <div>
+        <input type="radio" id="hr" name="jwt"
+          value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjU5OTk0NzgsInN1YiI6IjEyY2Q1N2E1LTEyOTUtNDRhMi1iZTA0LTNjN2NjYzQyY2YxOSIsImNvZGUiOiJnbnRrMTlaNyIsImVtYWlsIjoiaHJAb3RrbGkuY2MiLCJ1dHlwZSI6IkhSIn0.tq5NtziVuniG-fNhIEYUgfbB4U67cBbriAQeW1XlP7E">
+        <label for="hr">HR</label>
+      </div>
+      <div>
+        <input type="radio" id="anon" name="jwt" value="">
+        <label for="anon">ANON</label>
+      </div>
+    </div>
+    <div>
+      <div>
+        <input type="radio" id="get" name="method" value="GET">
+        <label for="get">get</label>
+      </div>
+      <div>
+        <input type="radio" id="post" name="method" value="POST">
+        <label for="post">post</label>
+      </div>
+      <div>
+        <input type="radio" id="put" name="method" value="PUT">
+        <label for="put">put</label>
+      </div>
+      <div>
+        <input type="radio" id="delete" name="method" value="DELETE">
+        <label for="delete">delete</label>
+      </div>
+    </div>
+    <input type="text" id="codeInput" value="" placeholder="code" style="height:20px">
+  </div>
+  <hr>
+  <textarea id="param" style="height:200px"></textarea>
+  <hr>
+  <button type="button" onclick="testapi();" name="button">SEND</button>
+  <hr>
+  <textarea id="request" placeholder="request url" style="background-color:green;color:white;"></textarea>
+  <textarea id="code" placeholder="response code" style="background-color:green;color:white;"></textarea>
+  <textarea id="body" placeholder="response body" style="background-color:green;color:white;height:200px"></textarea>
+</body>
+<script>
+  let method
+  let endpoint
+  let param
+  let jwt
+  let code
+  let usertype
+
+
+  document.querySelectorAll('input[type=radio]').forEach(item => {
+    item.addEventListener("change", function() {
+      if (this.name == 'method') {
+        method = this.value
+      }
+      if (this.name == 'jwt') {
+        jwt = this.value
+      }
+      if (this.name == 'endpoint') {
+        endpoint = this.value
+      }
+      defaultInput()
+    })
+  })
+  codeInput.addEventListener("input", function() {
+    code = this.value
+    defaultInput()
+  })
+
+  function defaultInput() {
+    switch (jwt) {
+      case "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjYwMDM3NTgsInN1YiI6IjJmNWFmMTAxLWFhNDQtNDM2NC1iYWYyLTJkZWZlMDdiYmYxZCIsImNvZGUiOiJnbnRscEV2YiIsImVtYWlsIjoidHJpNm9kaW5AZ21haWwuY29tIiwidXR5cGUiOiJDVVMifQ.ISAO6Er2XkV9COOwIwEiLSoxFAHZy2HIT_G54S50V_U":
+        usertype = 'cus'
+        break;
+      case "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjU5MjIzMTgsInN1YiI6IjIzMTc2MTAwLWFlMGUtNGMxZi1iNmFlLTgyMjRkMDJmNTNlYyIsImNvZGUiOiJnbnNuTkNhVCIsImVtYWlsIjoiaHJAb3RrbGkuY2MiLCJ1dHlwZSI6IkhSIn0.bmJimW-Q1Nq1XD5TF61GQZri1ItyjgJutnU7Rm6rxDo":
+        usertype = 'hr'
+        break;
+      case "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjI3MDg3MTcsInN1YiI6IjJmZWY2YzhhLWI3NDYtNDQ5NC04NzI3LTRhMmJlZTFlOGRkOCIsImNvZGUiOiJhZG0iLCJlbWFpbCI6ImFkbUBvdGtsaS5jYyIsInV0eXBlIjoiQURNIn0.Q5jiB4JnogP9QSxS9YF2tE_e7wWF6_eUr4HJCSJKCtM":
+        usertype = 'adm'
+        break;
+      default:
+        usertype = 'anon'
+    }
+    switch (method) {
+      case 'GET':
+        switch (endpoint) {
+          case 'https://api.otkli.cc:8080/v1.0/profile':
+            if (usertype != 'anon') {
+              document.querySelector('#param').value = 'code=' + code
+            } else {
+              document.querySelector('#param').value = ''
+            }
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/company':
+            if (usertype != 'anon') {
+              document.querySelector('#param').value = 'code=' + code
+            } else {
+              document.querySelector('#param').value = ''
+            }
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/vacancy':
+            if (usertype != 'anon') {
+              document.querySelector('#param').value = 'code=' + code
+            } else {
+              document.querySelector('#param').value = ''
+            }
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/groups':
+            document.querySelector('#param').value = 'group=geos|metatags|profession|companies'
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/search':
+            document.querySelector('#param').value = 'page_rows=5&page=1&professions=&parent_professions=&company=&parent_company=&geo=&parent_geo=&experience=1&deadline=false&popular=false'
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/scoring':
+            document.querySelector('#param').value = 'page_rows=&page=&code=gntke6ge&demand=d68a5863-a0de-472c-860c-ca1bb8712534&scored=false'
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/result':
+            document.querySelector('#param').value = ''
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/feed':
+            document.querySelector('#param').value = ''
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/fav':
+            document.querySelector('#param').value = ''
+            break;
+        }
+        break;
+      case 'POST':
+        switch (endpoint) {
+          case 'https://api.otkli.cc:8080/v1.0/company':
+            document.querySelector('#param').value = `{
+                "status": 10,
+                "name": "string",
+                "logo_image": "string",
+                "thumbnail_image": "string",
+                "color": "string",
+                "sec_color": "string",
+                "about": "string",
+                "sub_name": "string",
+                "synonyms": "string",
+                "comp_viewer_list": [
+                  "string"
+                ]
+              }`
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/vacancy':
+            document.querySelector('#param').value = `{
+              "comp_code": "string",
+              "vacancy_card": {
+                "title": "string",
+                "status": 0,
+                "experience": 0,
+                "leave_days": 0,
+                "busyness": 0,
+                "salary_lo": 0,
+                "salary_hi": 0,
+                "currency": "string",
+                "term": 0,
+                "about": "string"
+              },
+              "demands": [
+                "string"
+              ],
+              "terms": [
+                "string"
+              ],
+              "professions": [
+                "string"
+              ],
+              "geos": [
+                "string"
+              ],
+              "vac_owner_list": [
+                "string"
+              ],
+              "vac_viewer_list": [
+                "string"
+              ]
+            }`
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/groups':
+            document.querySelector('#param').value = `{
+                "group": "string",
+                "parent_val": "string",
+                "child_val": "string",
+                "syn": "string"
+              }`
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/search':
+            document.querySelector('#param').value = ''
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/scoring':
+            document.querySelector('#param').value = ''
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/result':
+            document.querySelector('#param').value = ''
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/feed':
+            document.querySelector('#param').value = ''
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/fav':
+            document.querySelector('#param').value = ''
+            break;
+        }
+        break;
+      case 'PUT':
+        switch (endpoint) {
+          case 'https://api.otkli.cc:8080/v1.0/profile':
+            document.querySelector('#param').value = `
+              {
+                "email": "user@example.com",
+                "password": "string",
+                "first_name": "string",
+                "last_name": "string",
+                "img": "string",
+                "about": "string",
+                "prof_view": 0,
+                "reqr_view": true,
+                "comp_view": true,
+                "notifications": 0,
+                "phone": "string",
+                "education": {},
+                "job": {}
+              }
+              `
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/company':
+            document.querySelector('#param').value = `
+              {
+                "status": 0,
+                "name": "string",
+                "logo_image": "string",
+                "thumbnail_image": "string",
+                "color": "string",
+                "sec_color": "string",
+                "about": "string",
+                "sub_name": "string",
+                "synonyms": "string",
+                "code": "string",
+                "owner_email": "string",
+                "owner_name": "string",
+                "verified": true,
+                "comp_viewer_list": [
+                  "string"
+                ]
+              }`
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/vacancy':
+            document.querySelector('#param').value = `{
+              "code": "string",
+              "vacancy_card": {
+                "title": "string",
+                "status": 0,
+                "experience": 0,
+                "leave_days": 0,
+                "busyness": 0,
+                "salary_lo": 0,
+                "salary_hi": 0,
+                "currency": "string",
+                "term": 0,
+                "about": "string"
+              },
+              "bookmarked": true,
+              "responses": {},
+              "metatags": {},
+              "coefficients": {},
+              "demands": {},
+              "terms": {},
+              "professions": [
+                "string"
+              ],
+              "geos": [
+                "string"
+              ],
+              "vac_owner_list": [
+                "string"
+              ],
+              "vac_viewer_list": [
+                "string"
+              ]
+            }`
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/groups':
+            document.querySelector('#param').value = `{
+                "group": "string",
+                "parent": "string",
+                "child": "string",
+                "new_name": "string"
+              }`
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/search':
+            document.querySelector('#param').value = ''
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/scoring':
+            document.querySelector('#param').value = `{
+                "demand": "d68a5863-a0de-472c-860c-ca1bb8712534",
+                "profile_code": "gntlpEvb",
+                "grade": 0
+              }`
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/result':
+            document.querySelector('#param').value = ''
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/feed':
+            document.querySelector('#param').value = ''
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/fav':
+            document.querySelector('#param').value = ''
+            break;
+        }
+        break;
+      case 'DELETE':
+        switch (endpoint) {
+          case 'https://api.otkli.cc:8080/v1.0/profile':
+            document.querySelector('#param').value = `{
+  "delete_acc": true,
+  "job": [
+    "string"
+  ],
+  "education": [
+    "string"
+  ],
+  "skills": [
+    "string"
+  ],
+  "comp_viewer_list": [
+    "string"
+  ],
+  "vac_owner_list": [
+    "string"
+  ],
+  "vac_viewer_list": [
+    "string"
+  ]
+}`
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/company':
+            document.querySelector('#param').value = `{
+  "code": "string",
+  "comp_viewer_list": [
+    "string"
+  ]
+}`
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/vacancy':
+            document.querySelector('#param').value = `{
+  "demands": [
+    "string"
+  ],
+  "terms": [
+    "string"
+  ],
+  "vac_owner_list": [
+    "string"
+  ],
+  "vac_viewer_list": [
+    "string"
+  ],
+  "code": "string",
+  "destroy_all": false,
+  "responses": [
+    "string"
+  ],
+  "professions": [
+    "string"
+  ],
+  "geos": [
+    "string"
+  ]
+}`
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/groups':
+            document.querySelector('#param').value = `{
+  "group": "string",
+  "parent": "string",
+  "child": "string"
+}`
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/search':
+            document.querySelector('#param').value = ''
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/scoring':
+            document.querySelector('#param').value = ''
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/result':
+            document.querySelector('#param').value = ''
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/feed':
+            document.querySelector('#param').value = ''
+            break;
+          case 'https://api.otkli.cc:8080/v1.0/fav':
+            document.querySelector('#param').value = ''
+            break;
+        }
+        break;
+    }
+  }
+  async function testapi() {
+    if ((endpoint == 'https://api.otkli.cc:8080/v1.0/profile' || endpoint == 'https://api.otkli.cc:8080/v1.0/company' || endpoint == 'https://api.otkli.cc:8080/v1.0/vacancy') && usertype == 'anon') {
+      switch (endpoint) {
+        case 'https://api.otkli.cc:8080/v1.0/profile':
+          endpoint = 'https://api.otkli.cc:8080/v1.0/profile/' + code
+          break;
+        case 'https://api.otkli.cc:8080/v1.0/company':
+          endpoint = 'https://api.otkli.cc:8080/v1.0/company/' + code
+          break;
+        case 'https://api.otkli.cc:8080/v1.0/vacancy':
+          endpoint = 'https://api.otkli.cc:8080/v1.0/vacancy/' + code
+          break;
+      }
+    }
+    let header = new Headers();
+    header.append('Content-Type', 'application/json;charset=utf-8');
+    header.append('Authorization', 'Bearer ' + jwt);
+    if (method == 'GET') {
+      document.querySelector('#request').value = endpoint + "?\n" + document.querySelector('#param').value;
+      var response = await fetch(endpoint + "?" + document.querySelector('#param').value, {
+        method: method,
+        headers: header
+      });
+    } else {
+      document.querySelector('#request').value = endpoint + "\n" + document.querySelector('#param').value;
+      var response = await fetch(endpoint, {
+        method: method,
+        headers: header,
+        body: document.querySelector('#param').value
+      });
+    }
+    document.querySelector('#body').value = JSON.stringify(await response.json(), null, '  ')
+    document.querySelector('#code').value = response.status + '\n' + usertype
+  }
+</script>
+
+</html>

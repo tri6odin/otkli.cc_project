@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <title>OfferFlow – Найди работу без резюме</title>
+
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="initial-scale=1, minimum-scale=1, minimal-ui, maximum-scale=5">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="Description" content="Put your description here.">
+
+  <!--<meta name="theme-color" content="#5856D6">-->
+
+  <link rel="icon" href="https://static.otkli.cc/svg/favicon.svg">
+
+  <link rel="preconnect" href="https://static.otkli.cc">
+  <link rel="preconnect" href="https://apis.google.com">
+
+  <link rel="stylesheet" href="https://static.otkli.cc/css/vars.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/fonts.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/colorset.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/main.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/buttons.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/search.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/mobile.css" defer>
+
+
+</head>
+
+<body tabindex="0" id="main">
+
+  <!--    overlay   -->
+
+  <overlay>
+
+  </overlay>
+
+  <!--    main page   -->
+
+  <top-nav>
+    <div>
+      <row class="xxs logo">
+        <a href="https://otkli.cc" alt='Главная cтраница'><img src="https://static.otkli.cc/svg/logoimg.svg" alt="Логотип otkli.cc" class="logoimg"></a>
+        <a href="https://otkli.cc" alt='Главная cтраница' class="hide-m"><img src="https://static.otkli.cc/svg/logotext.svg" alt="Текст логотипа otkli.cc" class="logotext"></a>
+      </row>
+      <row class="xs">
+      </row>
+    </div>
+  </top-nav>
+  <bottom-nav>
+  </bottom-nav>
+  <div id="myProgress">
+    <div id="myBar"></div>
+  </div>
+  <main>
+    <inline class="s hide-m" style="text-align:center;width:100%">
+      <label tabindex="0">
+        <input type="radio" name="cus_status" onclick="findButton();" value="" data-type="integer" data-target="cus_status" onclick="findButton();" data-id="cus_status" onclick="findButton();" checked>
+        <tag-s class="checkbox-purp button-gray-dark">
+          <p>Все вакансии</p>
+        </tag-s>
+      </label>
+      <label tabindex="0">
+        <input type="radio" name="cus_status" onclick="findButton();" value="10" data-type="integer" data-target="cus_status" onclick="findButton();" data-id="cus_status" onclick="findButton();">
+        <tag-s class="checkbox-purp button-gray-dark">
+          <p>Рекомендованные</p>
+        </tag-s>
+      </label>
+      <label tabindex="0">
+        <input type="radio" name="cus_status" onclick="findButton();" value="30" data-type="integer" data-target="cus_status" onclick="findButton();" data-id="cus_status" onclick="findButton();">
+        <tag-s class="checkbox-purp button-gray-dark">
+          <p>В избранном</p>
+        </tag-s>
+      </label>
+      <label tabindex="0">
+        <input type="radio" name="cus_status" onclick="findButton();" value="40" data-type="integer" data-target="cus_status" onclick="findButton();" data-id="cus_status" onclick="findButton();">
+        <tag-s class="checkbox-purp button-gray-dark">
+          <p>Ожидают скоринг</p>
+        </tag-s>
+      </label>
+      <label tabindex="0">
+        <input type="radio" name="cus_status" onclick="findButton();" value="50" data-type="integer" data-target="cus_status" onclick="findButton();" data-id="cus_status" onclick="findButton();">
+        <tag-s class="checkbox-purp button-gray-dark">
+          <p>Прошли скоринг</p>
+        </tag-s>
+      </label>
+    </inline>
+    <smalltext class="collapsible hide-d" tabindex="0" style="align-items: center;display: none;justify-content: center;">
+      <p>Добавить фильтр</p>
+      <icon class="i-filter" style="margin-left: 10px;"></icon>
+    </smalltext>
+    <div class="content" style="padding-left: 20px;padding-right: 20px;">
+      <column class="s">
+        <inline class="xs">
+          <label tabindex="0">
+            <input type="radio" name="cus_status" onclick="findButton();" value="" data-type="integer" data-target="cus_status" onclick="findButton();" data-id="cus_status" onclick="findButton();" checked>
+            <tag-xs class="checkbox-purp button-gray-dark">
+              <p>Все вакансии</p>
+            </tag-xs>
+          </label>
+          <label tabindex="0">
+            <input type="radio" name="cus_status" onclick="findButton();" value="10" data-type="integer" data-target="cus_status" onclick="findButton();" data-id="cus_status" onclick="findButton();">
+            <tag-xs class="checkbox-purp button-gray-dark">
+              <p>Рекомендованные</p>
+            </tag-xs>
+          </label>
+          <label tabindex="0">
+            <input type="radio" name="cus_status" onclick="findButton();" value="30" data-type="integer" data-target="cus_status" onclick="findButton();" data-id="cus_status" onclick="findButton();">
+            <tag-xs class="checkbox-purp button-gray-dark">
+              <p>В избранном</p>
+            </tag-xs>
+          </label>
+          <label tabindex="0">
+            <input type="radio" name="cus_status" onclick="findButton();" value="40" data-type="integer" data-target="cus_status" onclick="findButton();" data-id="cus_status" onclick="findButton();">
+            <tag-xs class="checkbox-purp button-gray-dark">
+              <p>Ожидают скоринг</p>
+            </tag-xs>
+          </label>
+          <label tabindex="0">
+            <input type="radio" name="cus_status" onclick="findButton();" value="50" data-type="integer" data-target="cus_status" onclick="findButton();" data-id="cus_status" onclick="findButton();">
+            <tag-xs class="checkbox-purp button-gray-dark">
+              <p>Прошли скоринг</p>
+            </tag-xs>
+          </label>
+        </inline>
+      </column>
+    </div>
+
+
+    <grid id='grid_main' style="height:auto">
+      <column class="m vac-prev skeleton" style="background-color:rgba(0,0,0,0);">
+        <row class="m">
+          <div class="skeleton_child" style="width:60px;height:60px;border-radius:50%;background-color:var(--gray-light);">
+          </div>
+          <column class="xxs" style="width:auto">
+            <tag-xs class="button-blue-dark skeleton_child" style="width:180px;background-color:var(--gray-light)">
+            </tag-xs>
+            <tag-xxxs class="button-gray-dark skeleton_child" style="width:50px;background-color:var(--gray-light)">
+              <p></p>
+            </tag-xxxs>
+          </column>
+        </row>
+        <hr style="border-color:rgba(0,0,0,0);">
+        <column class="xs">
+          <row class="between">
+            <tag-xs class="button-blue-dark skeleton_child" style="width:180px;background-color:var(--gray-light)">
+            </tag-xs>
+            <tag-xs class="button-blue-dark skeleton_child" style="width:40px;background-color:var(--gray-light)">
+            </tag-xs>
+          </row>
+          <row class="between">
+            <tag-xs class="button-blue-dark skeleton_child" style="width:120px;background-color:var(--gray-light)">
+            </tag-xs>
+            <tag-xs class="button-blue-dark skeleton_child" style="width:60px;background-color:var(--gray-light)">
+            </tag-xs>
+          </row>
+          <row class="between">
+            <tag-xs class="button-blue-dark skeleton_child" style="width:180px;background-color:var(--gray-light)">
+            </tag-xs>
+            <tag-xs class="button-blue-dark skeleton_child" style="width:40px;background-color:var(--gray-light)">
+            </tag-xs>
+          </row>
+          <row class="between">
+            <tag-xs class="button-blue-dark skeleton_child" style="width:120px;background-color:var(--gray-light)">
+            </tag-xs>
+            <tag-xs class="button-blue-dark skeleton_child" style="width:60px;background-color:var(--gray-light)">
+            </tag-xs>
+          </row>
+        </column>
+        <row class="xxs fullwidth">
+
+          <tag-l class="button-purp-light skeleton_child" tabindex="0" style="background-color:var(--gray-light)">
+          </tag-l>
+
+          <tag-l class="checkbox-purp button-purp-light sqr-btn skeleton_child" style="background-color:var(--gray-light)">
+          </tag-l>
+
+        </row>
+      </column>
+      <column class="m vac-prev skeleton" style="background-color:rgba(0,0,0,0);">
+        <row class="m">
+          <div class="skeleton_child" style="width:60px;height:60px;border-radius:50%;background-color:var(--gray-light);">
+          </div>
+          <column class="xxs" style="width:auto">
+            <tag-xs class="button-blue-dark skeleton_child" style="width:180px;background-color:var(--gray-light)">
+            </tag-xs>
+            <tag-xxxs class="button-gray-dark skeleton_child" style="width:50px;background-color:var(--gray-light)">
+              <p></p>
+            </tag-xxxs>
+          </column>
+        </row>
+        <hr style="border-color:rgba(0,0,0,0);">
+        <column class="xs">
+          <row class="between">
+            <tag-xs class="button-blue-dark skeleton_child" style="width:180px;background-color:var(--gray-light)">
+            </tag-xs>
+            <tag-xs class="button-blue-dark skeleton_child" style="width:40px;background-color:var(--gray-light)">
+            </tag-xs>
+          </row>
+          <row class="between">
+            <tag-xs class="button-blue-dark skeleton_child" style="width:120px;background-color:var(--gray-light)">
+            </tag-xs>
+            <tag-xs class="button-blue-dark skeleton_child" style="width:60px;background-color:var(--gray-light)">
+            </tag-xs>
+          </row>
+          <row class="between">
+            <tag-xs class="button-blue-dark skeleton_child" style="width:180px;background-color:var(--gray-light)">
+            </tag-xs>
+            <tag-xs class="button-blue-dark skeleton_child" style="width:40px;background-color:var(--gray-light)">
+            </tag-xs>
+          </row>
+          <row class="between">
+            <tag-xs class="button-blue-dark skeleton_child" style="width:120px;background-color:var(--gray-light)">
+            </tag-xs>
+            <tag-xs class="button-blue-dark skeleton_child" style="width:60px;background-color:var(--gray-light)">
+            </tag-xs>
+          </row>
+        </column>
+        <row class="xxs fullwidth">
+
+          <tag-l class="button-purp-light skeleton_child" tabindex="0" style="background-color:var(--gray-light)">
+          </tag-l>
+
+          <tag-l class="checkbox-purp button-purp-light sqr-btn skeleton_child" style="background-color:var(--gray-light)">
+          </tag-l>
+
+        </row>
+      </column>
+      <column class="m vac-prev skeleton" style="background-color:rgba(0,0,0,0);">
+        <row class="m">
+          <div class="skeleton_child" style="width:60px;height:60px;border-radius:50%;background-color:var(--gray-light);">
+          </div>
+          <column class="xxs" style="width:auto">
+            <tag-xs class="button-blue-dark skeleton_child" style="width:180px;background-color:var(--gray-light)">
+            </tag-xs>
+            <tag-xxxs class="button-gray-dark skeleton_child" style="width:50px;background-color:var(--gray-light)">
+              <p></p>
+            </tag-xxxs>
+          </column>
+        </row>
+        <hr style="border-color:rgba(0,0,0,0);">
+        <column class="xs">
+          <row class="between">
+            <tag-xs class="button-blue-dark skeleton_child" style="width:180px;background-color:var(--gray-light)">
+            </tag-xs>
+            <tag-xs class="button-blue-dark skeleton_child" style="width:40px;background-color:var(--gray-light)">
+            </tag-xs>
+          </row>
+          <row class="between">
+            <tag-xs class="button-blue-dark skeleton_child" style="width:120px;background-color:var(--gray-light)">
+            </tag-xs>
+            <tag-xs class="button-blue-dark skeleton_child" style="width:60px;background-color:var(--gray-light)">
+            </tag-xs>
+          </row>
+          <row class="between">
+            <tag-xs class="button-blue-dark skeleton_child" style="width:180px;background-color:var(--gray-light)">
+            </tag-xs>
+            <tag-xs class="button-blue-dark skeleton_child" style="width:40px;background-color:var(--gray-light)">
+            </tag-xs>
+          </row>
+          <row class="between">
+            <tag-xs class="button-blue-dark skeleton_child" style="width:120px;background-color:var(--gray-light)">
+            </tag-xs>
+            <tag-xs class="button-blue-dark skeleton_child" style="width:60px;background-color:var(--gray-light)">
+            </tag-xs>
+          </row>
+        </column>
+        <row class="xxs fullwidth">
+
+          <tag-l class="button-purp-light skeleton_child" tabindex="0" style="background-color:var(--gray-light)">
+          </tag-l>
+
+          <tag-l class="checkbox-purp button-purp-light sqr-btn skeleton_child" style="background-color:var(--gray-light)">
+          </tag-l>
+
+        </row>
+      </column>
+    </grid>
+
+    <tag-m id='loadmorebtn' class="button-gray-light loadanimation" tabindex="0" onclick="loadMore(this);" style="display:none">
+      <p>Загрузить еще</p>
+      <icon class="i-link"></icon>
+      <img src="https://static.otkli.cc/svg/loader-rings.svg" height="38">
+    </tag-m>
+  </main>
+
+  <input type="hidden" data-target="page" data-id="page" value="1" data-valid="true">
+  <input type="hidden" data-target="page_rows" data-id="page_rows" value="12" data-valid="true">
+  <template id='tmplVac'>
+    <column class="m vac-prev" style="border: 1px solid var(--gray-light);">
+      <row class="m">
+        <valid>
+          <a href="" id='comp_code' target="_blank">
+            <img class="med" src="" alt="Логотип Offerflow">
+          </a>
+        </valid>
+        <column class="xxs">
+          <a href="" class="vac-header" target="_blank">
+            <b style="font-size:16px;">
+
+            </b>
+          </a>
+          <tag-xxxs class="button-gray-dark">
+            <p></p>
+          </tag-xxxs>
+        </column>
+      </row>
+      <hr>
+      <column class="xs">
+        <row class="between">
+          <tag-xs class="button-blue-dark">
+            <icon class="i-ruble"></icon>
+            <p></p>
+          </tag-xs>
+          <smalltext>
+            <p>в месяц</p>
+          </smalltext>
+        </row>
+        <row class="between">
+          <tag-xs class="button-blue-dark">
+            <icon class="i-timer"></icon>
+            <p></p>
+          </tag-xs>
+          <smalltext>
+            <p>занятость</p>
+          </smalltext>
+        </row>
+        <row class="between">
+          <tag-xs class="button-blue-dark">
+            <icon class="i-pin"></icon>
+            <p></p>
+          </tag-xs>
+          <smalltext>
+            <p>локация</p>
+          </smalltext>
+        </row>
+        <row class="between">
+          <tag-xs class="button-blue-dark">
+            <icon class="i-eye"></icon>
+            <p></p>
+          </tag-xs>
+          <smalltext>
+            <p>просмотров</p>
+          </smalltext>
+        </row>
+      </column>
+      <row class="xxs fullwidth">
+        <tag-l class="button-purp-light" tabindex="0">
+          <p>Подробнее</p>
+          <icon class="i-link"></icon>
+        </tag-l>
+        <label tabindex="0" class="sqr-btn">
+          <input type="checkbox">
+          <tag-l class="checkbox-purp button-purp-light">
+            <icon class="i-bookmark"></icon>
+          </tag-l>
+        </label>
+      </row>
+    </column>
+  </template>
+  <template id='tmplFav'>
+    <column class="m vac-prev" style="border: 1px solid var(--gray-light);">
+      <row class="fullwidth" style="align-items:center;justify-content:space-between">
+        <row  class='xs' style="align-items:center">
+          <icon style="font-size:18px" class="i-search"></icon>
+          <b style="font-size:16px;cursor:pointer"></b>
+        </row>
+        <row  class='xs' style="align-items:center">
+          <vhr></vhr>
+          <icon style="color: var(--red);cursor:pointer;font-size:18px" class="i-delete"></icon>
+        </row>
+
+      </row>
+    </column>
+  </template>
+</body>
+<script src="https://static.otkli.cc/js/vars.js"></script>
+<script src="https://static.otkli.cc/js/scrolllockAndOverlay.js" defer></script>
+
+<script src="https://static.otkli.cc/js/AJAX.js" defer></script>
+<script src="https://static.otkli.cc/js/crawler.js" defer></script>
+
+<script src="https://static.otkli.cc/js/scripts.js" defer></script>
+<script src="https://static.otkli.cc/js/elements.js" defer></script>
+<script src="https://static.otkli.cc/js/auth.js" defer></script>
+
+<script src="https://static.otkli.cc/js/render/otkli.cc/navbars.js" defer></script>
+<script src="https://static.otkli.cc/js/render/otkli.cc/authform.js" defer></script>
+<script src="https://static.otkli.cc/js/render/otkli.cc/feed.js" defer></script>
+<script src="https://static.otkli.cc/js/render/otkli.cc/fav.js" defer></script>
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://static.otkli.cc/js/googleauth.js" defer></script>
+
+</html>

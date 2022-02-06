@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" href="croppie.css" />
+  <script src="croppie.js"></script>
+  <script src="exif.js"></script>
+</head>
+
+<body>
+  <input type="file" accept="image/png, image/jpeg" onchange="previewFile();">
+
+  <div id="demo"></div>
+  <button onclick="savePhoto('profile');">Result</button>
+  <script>
+    /*
+    const fileInput = document.querySelector('input[type="file"]');
+    fileInput.onchange = () => {
+      console.log(fileInput.files[0].name);
+      photoUploader(fileInput.files[0].name, 'profile')
+    }
+*/
+let vanillaCroppie;
+let vanillaFiletype;
+    function previewFile() {
+      var file = document.querySelector('input[type=file]').files[0];
+
+
+      if (vanillaCroppie) {
+        vanillaCroppie.destroy()
+      }
+      vanillaFiletype = file['type'].split('/')[1];
+      runCroppie(URL.createObjectURL(file))
+    }
+
+
+
+
+
+
+    function runCroppie(fileurl) {
+      var t0 = performance.now()
+      let el = document.getElementById('demo');
+      vanillaCroppie = new Croppie(el, {
+        enableExif: true,
+        enableOrientation: true,
+        viewport: {
+          width: 300,
+          height: 300,
+          type: 'circle'
+        },
+        boundary: {
+          width: 300,
+          height: 300
+        },
+        showZoomer: true
+      });
+      vanillaCroppie.bind({
+        url: fileurl
+      });
+      var t1 = performance.now()
+      console.log("runcroppiebind " + (t1 - t0) + " milliseconds.")
+
+    }
+
+    function savePhoto(dir) {
+      var t0 = performance.now()
+      vanillaCroppie.result({
+        type: 'blob',
+        size: 'original',
+        format: vanillaFiletype,
+        quality: 0.85,
+        //format: 'png',
+        circle: false
+      }).then(async function(blob) {
+        let formData = new FormData();
+        let user_data = JSON.parse(localStorage.getItem('user_data'));
+        formData.append('dir', dir);
+        formData.append('userfile', blob);
+        formData.append('jwt', user_data.jwt);
+        let response = await fetch('https://static.otkli.cc/', {
+          method: 'POST',
+          body: formData
+        });
+        let json = await response.json();
+        if (response.ok) {
+          var t1 = performance.now()
+          console.log("runcroppiebind " + (t1 - t0) + " milliseconds.")
+          console.log(blob);
+          console.log(json);
+        } else {
+          console.log(json);
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
+
+</html>

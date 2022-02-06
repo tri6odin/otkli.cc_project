@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <title>Welcome to your_domain!</title>
+
+</head>
+
+<body style="display:flex;flex-direction:column;width:600px;">
+  <form id="formElem" style="display:flex;flex-direction:column;width:600px;">
+    <input type="text" name="dir" value="profile">
+    <input type="text" name="jwt" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjA1OTAzMjcsInN1YiI6IjNjZjZlMzA2LTFkMGMtNDY0MC04NzQ3LTkxNjc1NjNjYmVlYSIsImNvZGUiOiJpbmJveCIsImVtYWlsIjoiaW5ib3hAb3RrbGkuY2MiLCJ1dHlwZSI6IkFETSJ9.6Dz4j6BhTD2LRf5zkPrYnRuPs4xQbfG2HXY8W71Ju9k">
+    <input name="userfile"  type="file" />
+    <hr>
+    <input type="submit">
+  </form>
+<hr>
+  <textarea id="request" placeholder="request url" style="background-color:green;color:white;"></textarea>
+  <textarea id="code" placeholder="response code" style="background-color:green;color:white;"></textarea>
+  <textarea id="body" placeholder="response body" style="background-color:green;color:white;"></textarea>
+
+</body>
+<script type="text/javascript">
+  formElem.onsubmit = async (e) => {
+    e.preventDefault();
+    endpoint = 'https://static.otkli.cc/';
+    document.querySelector('#request').value = endpoint;
+    let response = await fetch(endpoint, {
+      method: 'POST',
+      body: new FormData(formElem)
+    });
+    document.querySelector('#body').value = await response.text()
+    document.querySelector('#code').value = response.status
+  }
+</script>
+</html>

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <title></title>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="initial-scale=1, minimum-scale=1, minimal-ui, maximum-scale=5">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="Description" content="">
+
+  <link rel="icon" href="https://static.otkli.cc/svg/favicon.svg">
+
+  <link rel="preconnect" href="https://static.otkli.cc">
+  <link rel="preconnect" href="https://apis.google.com">
+
+  <link rel="stylesheet" href="https://static.otkli.cc/css/vars.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/fonts.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/colorset.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/main.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/buttons.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/search.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/mobile.css" defer>
+
+
+
+
+</head>
+
+<body tabindex="0" id="main">
+  <!--    overlay   -->
+  <overlay>
+    <croppie style="flex-direction:column">
+      <div id="demo"></div>
+      <tag-l class="button-purp-light" tabindex="0" onclick="savePhoto('profile');">
+        <p>Сохранить</p>
+      </tag-l>
+    </croppie>
+  </overlay>
+  <!--    main page   -->
+
+  <cookies>
+    <row class="m">
+      <p style="font-weight:300;font-size:14px;">
+        Мы <b>используем файлы cookie</b> для работы и улучшения всех своих сайтов. <b>И это прекрасно!</b>
+      </p>
+      <icon style="cursor:pointer" onclick="cookieDeleter(this);" class='i-close'></icon>
+    </row>
+  </cookies>
+  <top-nav>
+    <div>
+      <row class="xxs logo">
+        <a href="https://otkli.cc" alt='Главная cтраница'><img src="https://static.otkli.cc/svg/logoimg.svg" alt="Логотип otkli.cc" class="logoimg"></a>
+        <a href="https://otkli.cc" alt='Главная cтраница' class="hide-m"><img src="https://static.otkli.cc/svg/logotext.svg" alt="Текст логотипа otkli.cc" class="logotext"></a>
+      </row>
+      <row class="xs">
+      </row>
+    </div>
+  </top-nav>
+  <bottom-nav>
+  </bottom-nav>
+  <header>
+    <column class="m fullwidth" style="align-items:center;display:none">
+      <banner-indicator></banner-indicator>
+      <banner>
+        <hero id="banner-1" class='vac'>
+          <row class="m fullwidth" style="align-items:center">
+            <column class="m">
+              <h2>Расскажите о вашем опыте</h2>
+              <h4>Отклик занимает не более 5 минут.<br>И никакого резюме!</h4>
+            </column>
+            <img src="https://static.otkli.cc/svg/message.svg" alt="" class='banner'>
+          </row>
+        </hero>
+        <hero id="banner-2" class='vac'>
+          <row class="m fullwidth" style="align-items:center">
+            <column class="m">
+              <h2>Получите фидбек и рекомендации</h2>
+              <h4>Покажем Ваши сильные стороны и порекомендуем подходящие вакансии</h4>
+            </column>
+            <img src="https://static.otkli.cc/svg/likedislike.svg" alt="" class='banner'>
+          </row>
+        </hero>
+        <hero id="banner-3" class='vac'>
+          <row class="m fullwidth" style="align-items:center">
+            <column class="m">
+              <h2>Управляйте вашей приватностью</h2>
+              <h4>Показать предыдущее место работы или оставаться анонимным – решаете Вы</h4>
+            </column>
+            <img src="https://static.otkli.cc/svg/safety.svg" alt="" class='banner'>
+          </row>
+        </hero>
+      </banner>
+      <tag-s class="button-black-contrast" tabindex="0" onclick="bannerDeleter(this);">
+        <p>Все понятно!</p>
+      </tag-s>
+    </column>
+  </header>
+  <div id="myProgress">
+    <div id="myBar"></div>
+  </div>
+  <main>
+    <!--
+    <column class="m vac-full">
+      <column class="m vacancy-full hide-m">
+        <row class="m">
+          <valid>
+            <a id='comp_code' href="">
+              <img id='logo_image' class="med" src="" alt="">
+            </a>
+          </valid>
+          <column class="xxs">
+            <a id='vac_code' href="" class="vac-header">
+              <b id='title'>
+
+              </b>
+            </a>
+            <tag-xxxs class="button-gray-dark">
+              <p></p>
+            </tag-xxxs>
+          </column>
+        </row>
+        <hr>
+        <column class="xs inline">
+          <row class="between">
+            <tag-xs class="button-blue-dark">
+              <icon class="i-ruble" id='currency'></icon>
+              <p id='salary'></p>
+            </tag-xs>
+            <smalltext>
+              <p id='term'></p>
+            </smalltext>
+          </row>
+          <row class="between">
+            <tag-xs class="button-blue-dark">
+              <icon class="i-timer"></icon>
+              <p id='busyness'></p>
+            </tag-xs>
+            <smalltext>
+              <p>занятость</p>
+            </smalltext>
+          </row>
+          <row class="between">
+            <tag-xs class="button-blue-dark">
+              <icon class="i-pin"></icon>
+              <p id='geo'></p>
+            </tag-xs>
+            <smalltext>
+              <p>локация</p>
+            </smalltext>
+          </row>
+          <row class="between">
+            <tag-xs class="button-blue-dark">
+              <icon class="i-eye"></icon>
+              <p id='views'></p>
+            </tag-xs>
+            <smalltext>
+              <p>просмотров</p>
+            </smalltext>
+          </row>
+          <row class="between hide-m">
+            <tag-xs class="button-gray-dark">
+              <icon class="i-pin"></icon>
+              <p id='leave_days'></p>
+            </tag-xs>
+          </row>
+        </column>
+      </column>
+      <column class="m vac-prev-2 vac-prev hide-d">
+        <row class="m">
+          <valid>
+            <a href="" id='comp_code2'>
+              <img id='logo_image2' class="med" src="" alt="">
+            </a>
+          </valid>
+          <column class="xxs">
+            <a id='vac_code2' href="" class="vac-header">
+              <b  style="font-size:16px;" id='title2'>
+
+              </b>
+            </a>
+            <tag-xxxs class="button-gray-dark">
+              <p id='leave_days2'></p>
+            </tag-xxxs>
+          </column>
+        </row>
+        <hr>
+        <column class="xs">
+          <row class="between">
+            <tag-xs class="button-blue-dark">
+              <icon class="i-ruble" id='currency2'></icon>
+              <p id='salary2'></p>
+            </tag-xs>
+            <smalltext>
+              <p id='term2'></p>
+            </smalltext>
+          </row>
+          <row class="between">
+            <tag-xs class="button-blue-dark">
+              <icon class="i-timer"></icon>
+              <p id='busyness2'></p>
+            </tag-xs>
+            <smalltext>
+              <p>занятость</p>
+            </smalltext>
+          </row>
+          <row class="between">
+            <tag-xs class="button-blue-dark">
+              <icon class="i-pin"></icon>
+              <p id='geo2'></p>
+            </tag-xs>
+            <smalltext>
+              <p>локация</p>
+            </smalltext>
+          </row>
+          <row class="between">
+            <tag-xs class="button-blue-dark">
+              <icon class="i-eye"></icon>
+              <p id='views2'></p>
+            </tag-xs>
+            <smalltext>
+              <p>просмотров</p>
+            </smalltext>
+          </row>
+        </column>
+      </column>
+
+
+      <hr>
+      <span id='about'></SPAN>
+      <hr>
+      <b>Требования:</b>
+      <column class='m'>
+        <column id='demand' class='m'>
+          <span></SPAN>
+          <textarea-parent>
+            <textarea maxlength="500" data-parent='responses' data-target='response' data-valid='true' placeholder="Кратко расскажите о вашем опыте"></textarea>
+            <span></span>
+          </textarea-parent>
+        </column>
+      </column>
+      <hr>
+      <b>Условия:</b>
+      <ul>
+        <li id='termslist'></li>
+      </ul>
+      <hr>
+      <column id="responseform">
+      </column>
+      <input type="hidden" id='code' data-target="response" data-id="code" data-valid="true">
+    </column>
+    -->
+    <!--
+    <grid>
+    </grid>
+    <tag-m id='loadmorebtn' class="button-gray-light loadanimation" tabindex="0" onclick="loadMore(this);">
+      <p>Загрузить еще</p>
+      <icon class="i-link"></icon>
+      <img src="https://static.otkli.cc/svg/loader-rings.svg"height = "38">
+    </tag-m>
+    -->
+  </main>
+
+
+  <footer>
+
+  </footer>
+  <input type="hidden" data-target="page" data-id="page" value="1" data-valid="true">
+  <input type="hidden" data-target="page_rows" data-id="page_rows" value="6" data-valid="true">
+  <input type="hidden" data-target="professions" data-id="professions" data-valid="true">
+  <input type="hidden" data-target="geo" data-id="geo" data-valid="true">
+
+  <template id='tmpl'>
+    <column class="m vac-prev">
+      <row class="m">
+        <valid>
+          <a href="" id='comp_code' target="_blank">
+            <img class="med" src="" alt="Логотип Offerflow">
+          </a>
+        </valid>
+        <column class="xxs">
+          <a href="" class="vac-header" target="_blank">
+            <b style="font-size:16px;">
+
+            </b>
+          </a>
+          <tag-xxxs class="button-gray-dark">
+            <p></p>
+          </tag-xxxs>
+        </column>
+      </row>
+      <hr>
+      <column class="xs">
+        <row class="between">
+          <tag-xs class="button-blue-dark">
+            <icon class="i-ruble"></icon>
+            <p></p>
+          </tag-xs>
+          <smalltext>
+            <p>в месяц</p>
+          </smalltext>
+        </row>
+        <row class="between">
+          <tag-xs class="button-blue-dark">
+            <icon class="i-timer"></icon>
+            <p></p>
+          </tag-xs>
+          <smalltext>
+            <p>занятость</p>
+          </smalltext>
+        </row>
+        <row class="between">
+          <tag-xs class="button-blue-dark">
+            <icon class="i-pin"></icon>
+            <p></p>
+          </tag-xs>
+          <smalltext>
+            <p>локация</p>
+          </smalltext>
+        </row>
+        <row class="between">
+          <tag-xs class="button-blue-dark">
+            <icon class="i-eye"></icon>
+            <p></p>
+          </tag-xs>
+          <smalltext>
+            <p>просмотров</p>
+          </smalltext>
+        </row>
+      </column>
+      <row class="xxs fullwidth">
+        <tag-l class="button-purp-light" tabindex="0">
+          <p>Подробнее</p>
+          <icon class="i-link"></icon>
+        </tag-l>
+        <label tabindex="0" class="sqr-btn">
+          <input type="checkbox">
+          <tag-l class="checkbox-purp button-purp-light">
+            <icon class="i-bookmark"></icon>
+          </tag-l>
+        </label>
+      </row>
+    </column>
+  </template>
+  <template id='tmpl_vac'>
+    <column class="m vac-full">
+      <column class="m vacancy-full hide-m">
+        <row class="m">
+          <valid>
+            <a id='comp_code' href="">
+              <img id='logo_image' class="med" src="" alt="">
+            </a>
+          </valid>
+          <column class="xxs">
+            <a id='vac_code' href="" class="vac-header">
+              <b id='title'>
+
+              </b>
+            </a>
+            <tag-xxxs class="button-gray-dark">
+              <p></p>
+            </tag-xxxs>
+          </column>
+        </row>
+        <hr>
+        <column class="xs inline">
+          <row class="between">
+            <tag-xs class="button-blue-dark">
+              <icon class="i-ruble" id='currency'></icon>
+              <p id='salary'></p>
+            </tag-xs>
+            <smalltext>
+              <p id='term'></p>
+            </smalltext>
+          </row>
+          <row class="between">
+            <tag-xs class="button-blue-dark">
+              <icon class="i-timer"></icon>
+              <p id='busyness'></p>
+            </tag-xs>
+            <smalltext>
+              <p>занятость</p>
+            </smalltext>
+          </row>
+          <row class="between">
+            <tag-xs class="button-blue-dark">
+              <icon class="i-pin"></icon>
+              <p id='geo'></p>
+            </tag-xs>
+            <smalltext>
+              <p>локация</p>
+            </smalltext>
+          </row>
+          <row class="between">
+            <tag-xs class="button-blue-dark">
+              <icon class="i-eye"></icon>
+              <p id='views'></p>
+            </tag-xs>
+            <smalltext>
+              <p>просмотров</p>
+            </smalltext>
+          </row>
+          <row class="between hide-m">
+            <tag-xs class="button-gray-dark">
+              <icon class="i-pin"></icon>
+              <p id='leave_days'></p>
+            </tag-xs>
+          </row>
+        </column>
+      </column>
+      <column class="m vac-prev-2 vac-prev hide-d">
+        <row class="m">
+          <valid>
+            <a href="" id='comp_code2'>
+              <img id='logo_image2' class="med" src="" alt="">
+            </a>
+          </valid>
+          <column class="xxs">
+            <a id='vac_code2' href="" class="vac-header">
+              <b style="font-size:16px;" id='title2'>
+
+              </b>
+            </a>
+            <tag-xxxs class="button-gray-dark">
+              <p id='leave_days2'></p>
+            </tag-xxxs>
+          </column>
+        </row>
+        <hr>
+        <column class="xs">
+          <row class="between">
+            <tag-xs class="button-blue-dark">
+              <icon class="i-ruble" id='currency2'></icon>
+              <p id='salary2'></p>
+            </tag-xs>
+            <smalltext>
+              <p id='term2'></p>
+            </smalltext>
+          </row>
+          <row class="between">
+            <tag-xs class="button-blue-dark">
+              <icon class="i-timer"></icon>
+              <p id='busyness2'></p>
+            </tag-xs>
+            <smalltext>
+              <p>занятость</p>
+            </smalltext>
+          </row>
+          <row class="between">
+            <tag-xs class="button-blue-dark">
+              <icon class="i-pin"></icon>
+              <p id='geo2'></p>
+            </tag-xs>
+            <smalltext>
+              <p>локация</p>
+            </smalltext>
+          </row>
+          <row class="between">
+            <tag-xs class="button-blue-dark">
+              <icon class="i-eye"></icon>
+              <p id='views2'></p>
+            </tag-xs>
+            <smalltext>
+              <p>просмотров</p>
+            </smalltext>
+          </row>
+        </column>
+      </column>
+
+
+      <hr>
+      <span id='about'></SPAN>
+      <hr>
+      <b>Требования:</b>
+      <column class='m'>
+        <column id='demand' class='m'>
+          <span></SPAN>
+          <textarea-parent>
+            <textarea maxlength="500" data-parent='responses' data-target='response' data-valid='true' placeholder="Кратко расскажите о вашем опыте"></textarea>
+            <span><icon class="i-info" onclick="popup('Опишите что делали или знаете, каких результатов добились в этой области. Вставьте ссылку на портфолио, кейсы или сертификаты при необходимости.<br><b>На все требования отвечать не обязательно</b>.', 'none', 'gray', '60', true)" style="display:flex; color: var(--gray); font-weight:300;line-height:1;margin-right:10px;margin-bottom:10px;font-size:var(--font-m);cursor:pointer"></icon></span>
+          </textarea-parent>
+        </column>
+      </column>
+      <hr>
+      <b>Условия:</b>
+      <ul>
+        <li id='termslist'></li>
+      </ul>
+      <hr>
+      <column id="responseform">
+      </column>
+      <input type="hidden" id='code' data-target="response" data-id="code" data-valid="true">
+    </column>
+  </template>
+</body>
+
+<script src="https://static.otkli.cc/js/vars.js"></script>
+<script src="https://static.otkli.cc/js/scrolllockAndOverlay.js" defer></script>
+
+<script src="https://static.otkli.cc/js/AJAX.js" defer></script>
+<script src="https://static.otkli.cc/js/crawler.js" defer></script>
+
+<script src="https://static.otkli.cc/js/autocomplete.js" defer></script>
+<script src="https://static.otkli.cc/js/scripts.js" defer></script>
+<script src="https://static.otkli.cc/js/elements.js" defer></script>
+<script src="https://static.otkli.cc/js/auth.js" defer></script>
+
+<script src="https://static.otkli.cc/js/tagify.js" defer></script>
+
+<script src="https://static.otkli.cc/js/render/otkli.cc/navbars.js" defer></script>
+<script src="https://static.otkli.cc/js/render/otkli.cc/authform.js" defer></script>
+<script src="https://static.otkli.cc/js/render/vacancy.js" defer></script>
+<script src="https://static.otkli.cc/js/render/otkli.cc/vacancy.js" defer></script>
+
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://static.otkli.cc/js/googleauth.js" defer></script>
+<script src="https://unpkg.com/vconsole/dist/vconsole.min.js"></script>
+<script>
+  // VConsole will be exported to `window.VConsole` by default.
+  var vConsole = new window.VConsole();
+</script>
+
+</html>
