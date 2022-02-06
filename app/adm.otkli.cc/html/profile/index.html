@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <title></title>
+
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="initial-scale=1, minimum-scale=1, minimal-ui, maximum-scale=5">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="Description" content="Put your description here.">
+
+  <meta name="theme-color" content="#5856D6">
+
+  <link rel="icon" href="https://static.otkli.cc/svg/favicon.svg">
+
+  <link rel="preconnect" href="https://static.otkli.cc">
+  <link rel="preconnect" href="https://apis.google.com">
+
+  <link rel="stylesheet" href="https://static.otkli.cc/css/vars.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/fonts.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/colorset.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/main.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/buttons.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/search.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/mobile.css" defer>
+
+
+
+
+</head>
+
+<body tabindex="0" id="main">
+  <!--    overlay   -->
+  <overlay>
+
+  </overlay>
+  <!--    main page   -->
+
+  <cookies>
+  </cookies>
+  <top-nav>
+    <div>
+      <row class="xxs logo">
+        <a href="https://adm.otkli.cc" alt='Главная cтраница'><img src="https://static.otkli.cc/svg/logoimg.svg" alt="Логотип otkli.cc" class="logoimg"></a>
+        <a href="https://adm.otkli.cc" alt='Главная cтраница' class="hide-m"><img src="https://static.otkli.cc/svg/logotext.svg" alt="Текст логотипа otkli.cc" class="logotext"></a>
+      </row>
+      <row class="xs">
+      </row>
+    </div>
+  </top-nav>
+  <bottom-nav>
+  </bottom-nav>
+
+  <div id="myProgress">
+    <div id="myBar"></div>
+  </div>
+  <main>
+
+    <pre>
+    </pre>
+  </main>
+
+  <footer>
+
+  </footer>
+</body>
+<template id='tmpl_prof'>
+  <column class="m vac-full">
+    <column class="m vacancy-full hide-m" style="overflow:hidden">
+      <row class="m">
+        <valid>
+          <img id="logo_image" class="med" src="" alt="">
+        </valid>
+        <column class="xxs">
+          <b style="font-size:20px;" id="title"></b>
+        </column>
+      </row>
+    </column>
+    <column class="m vac-prev-2 vac-prev hide-d" style="overflow:hidden">
+      <row class="m">
+        <valid>
+            <img id="logo_image2" class="med" src="" alt="">
+        </valid>
+        <column class="xxs">
+            <b style="font-size:20px;" id="title2"></b>
+        </column>
+      </row>
+    </column>
+    <hr>
+    <span id="about"></span>
+    <hr>
+    <b style="font-size:18px;">Работа и образование</b>
+    <row class="s double">
+      <ul>
+        <li id="joblist">
+          <b></b>
+          <br>
+          <p></p>
+        </li>
+      </ul>
+      <ul>
+        <li id="edulist">
+          <b></b>
+          <br>
+          <p></p>
+        </li>
+      </ul>
+    </row>
+    <hr>
+    <b id="skillhead" style="font-size:18px;">Подвержденные навыки</b>
+    <inline  class="s" style="text-align:left;">
+      <tag-s id="skilllist" class="button-gray-dark">
+        <p></p>
+      </tag-s>
+    </inline>
+    <b id="hrhead" style="font-size:18px;">Опубликованные вакансии и компании</b>
+    <row class="s double">
+      <ul>
+        <li id="vacancylist">
+          <a href="" style="font-weight: var(--regular);font-size:var(--font-s)"></a>
+        </li>
+      </ul>
+      <ul>
+        <li id="companylist">
+          <a href="" style="font-weight: var(--regular);font-size:var(--font-s)"></a>
+        </li>
+      </ul>
+    </row>
+  </column>
+</template>
+<script src="https://static.otkli.cc/js/vars.js"></script>
+<script src="https://static.otkli.cc/js/scrolllockAndOverlay.js" defer></script>
+
+<script src="https://static.otkli.cc/js/AJAX.js" defer></script>
+<script src="https://static.otkli.cc/js/crawler.js" defer></script>
+
+<script src="https://static.otkli.cc/js/autocomplete.js" defer></script>
+<script src="https://static.otkli.cc/js/scripts.js" defer></script>
+<script src="https://static.otkli.cc/js/elements.js" defer></script>
+<script src="https://static.otkli.cc/js/auth.js" defer></script>
+
+<script src="https://static.otkli.cc/js/tagify.js" defer></script>
+
+<script src="https://static.otkli.cc/js/render/adm.otkli.cc/navbars.js" defer></script>
+<script src="https://static.otkli.cc/js/render/adm.otkli.cc/authform.js" defer></script>
+<script src="https://static.otkli.cc/js/render/profile.js" defer></script>
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://static.otkli.cc/js/googleauth.js" defer></script>
+<script src="https://unpkg.com/vconsole/dist/vconsole.min.js"></script>
+<script>
+  // VConsole will be exported to `window.VConsole` by default.
+  var vConsole = new window.VConsole();
+</script>
+
+</html>

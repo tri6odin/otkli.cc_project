@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <title>Редактирование профиля – Отклик</title>
+
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="initial-scale=1, minimum-scale=1, minimal-ui, maximum-scale=5">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="Description" content="Put your description here.">
+
+  <link rel="icon" href="https://static.otkli.cc/svg/favicon.svg">
+
+  <link rel="preconnect" href="https://static.otkli.cc">
+
+  <link rel="stylesheet" href="https://static.otkli.cc/css/vars.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/fonts.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/colorset.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/main.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/buttons.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/search.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/mobile.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/croppie.css" defer>
+
+
+
+
+</head>
+
+<body tabindex="0" id="main">
+  <!--    overlay   -->
+  <overlay>
+    <croppie style="flex-direction:column">
+      <div id="demo"></div>
+      <tag-l class="button-purp-light" tabindex="0" onclick="savePhoto('profile');">
+        <p>Сохранить</p>
+      </tag-l>
+    </croppie>
+  </overlay>
+  <!--    main page   -->
+
+  <top-nav>
+    <div>
+      <row class="xxs logo">
+        <a href="https://adm.otkli.cc" alt='Главная cтраница'><img src="https://static.otkli.cc/svg/logoimg.svg" alt="Логотип otkli.cc" class="logoimg"></a>
+        <a href="https://adm.otkli.cc" alt='Главная cтраница' class="hide-m"><img src="https://static.otkli.cc/svg/logotext.svg" alt="Текст логотипа otkli.cc" class="logotext"></a>
+      </row>
+      <row class="xs">
+      </row>
+    </div>
+  </top-nav>
+  <bottom-nav>
+  </bottom-nav>
+
+  <div id="myProgress">
+    <div id="myBar"></div>
+  </div>
+  <main>
+    <column class="m vac-full">
+      <p>Расскажите о себе — это поможет работодателю принять решение о найме</p>
+      <b>Как к вам обращаться?</b>
+      <column class="xs" style="align-items: flex-end;">
+        <row class="m double">
+          <input type="text" placeholder="Имя" autocomplete="name" data-target="settings" data-id="first_name" >
+          <input type="text" placeholder="Фамилия" autocomplete="last-name" data-target="settings" data-id="last_name">
+        </row>
+        <label tabindex="0">
+          <input type="file" accept="image/png, image/jpeg" onchange="previewFile();" style="display: none;">
+          <tag-xs class="checkbox-purp button-gray-dark">
+            <icon class="i-photo"></icon>
+            <p>Изменить фото</p>
+          </tag-xs>
+        </label>
+      </column>
+      <textarea-parent>
+        <textarea maxlength="500" placeholder="Био" data-target="settings" data-id="about"></textarea>
+        <span></span>
+      </textarea-parent>
+      <b>Где вы учились?</b>
+      <column class="xs education" style="align-items: flex-end;">
+        <row class="m double double_input">
+          <input type="text" placeholder="Учебное заведение" data-target="settings" data-parent="education">
+          <input type="text" placeholder="Специальность" data-target="settings" data-parent="education">
+        </row>
+        <tag-xs class="checkbox-purp button-gray-dark" onclick="duplicatePrevElementPair(this);">
+          <icon class="i-plus"></icon>
+          <p>Добавить учебное заведение</p>
+        </tag-xs>
+      </column>
+      <b>Где вы работали?</b>
+      <column class="xs job"  style="align-items: flex-end;">
+        <row class="m double double_input">
+          <input type="text" placeholder="Название компании" data-target="settings" data-parent="job">
+          <input type="text" placeholder="Должность" data-target="settings" data-parent="job">
+        </row>
+        <tag-xs class="checkbox-purp button-gray-dark" onclick="duplicatePrevElementPair(this);">
+          <icon class="i-plus"></icon>
+          <p>Добавить место работы</p>
+        </tag-xs>
+      </column>
+      <hr>
+      <b>Персональные данные</b>
+      <row class="m double">
+        <ico-input class="i-dog">
+          <input type="email" placeholder="Ваша почта" data-target="settings" data-id="email">
+        </ico-input>
+        <ico-input class="i-phone">
+          <input type="tel" placeholder="Телефон" data-target="settings" data-id="phone">
+        </ico-input>
+      </row>
+      <b>Изменить пароль</b>
+      <row class="m double same_pass">
+        <ico-input class="i-key">
+          <input type="password" placeholder="Новый пароль">
+        </ico-input>
+        <ico-input class="i-key">
+          <input type="password" placeholder="Повторите новый пароль"  data-target="settings" data-id="password">
+        </ico-input>
+      </row>
+      <hr>
+      <tag-l class="button-purp-contrast" tabindex="0" onclick="saveSettings();">
+        <p>Сохранить</p>
+      </tag-l>
+
+    </column>
+    <tag-s class="button-red-contrast" tabindex="0" onclick="logOut();">
+      <p>Выйти</p>
+    </tag-s>
+  </main>
+
+  <footer>
+
+  </footer>
+</body>
+
+<script src="https://static.otkli.cc/js/vars.js"></script>
+<script src="https://static.otkli.cc/js/scrolllockAndOverlay.js" defer></script>
+
+<script src="https://static.otkli.cc/js/AJAX.js" defer></script>
+<script src="https://static.otkli.cc/js/crawler.js" defer></script>
+
+<script src="https://static.otkli.cc/js/autocomplete.js" defer></script>
+<script src="https://static.otkli.cc/js/scripts.js" defer></script>
+<script src="https://static.otkli.cc/js/elements.js" defer></script>
+<script src="https://static.otkli.cc/js/auth.js" defer></script>
+
+<script src="https://static.otkli.cc/js/tagify.js" defer></script>
+
+<script src="https://static.otkli.cc/js/render/adm.otkli.cc/navbars.js" defer></script>
+<script src="https://static.otkli.cc/js/render/adm.otkli.cc/authform.js" defer></script>
+<script src="https://static.otkli.cc/js/render/edit/profile.js" defer></script>
+<script src="https://static.otkli.cc/js/croppie.js" defer></script>
+<script src="https://static.otkli.cc/js/exif.js" defer></script>
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://static.otkli.cc/js/googleauth.js" defer></script>
+<script src="https://unpkg.com/vconsole/dist/vconsole.min.js"></script>
+<script>
+  // VConsole will be exported to `window.VConsole` by default.
+  var vConsole = new window.VConsole();
+</script>
+
+</html>

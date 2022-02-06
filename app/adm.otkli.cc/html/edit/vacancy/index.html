@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <title>OfferFlow – Найди работу без резюме</title>
+
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="initial-scale=1, minimum-scale=1, minimal-ui, maximum-scale=5">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="Description" content="Put your description here.">
+
+  <meta name="theme-color" content="#5856D6">
+
+  <link rel="icon" href="https://static.otkli.cc/svg/favicon.svg">
+
+  <link rel="preconnect" href="https://static.otkli.cc">
+  <link rel="preconnect" href="https://apis.google.com">
+
+  <link rel="stylesheet" href="https://static.otkli.cc/css/vars.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/fonts.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/colorset.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/main.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/buttons.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/search.css" defer>
+  <link rel="stylesheet" href="https://static.otkli.cc/css/mobile.css" defer>
+
+
+</head>
+
+<body tabindex="0" id="main">
+  <!--    overlay   -->
+  <overlay>
+  </overlay>
+  <!--    main page   -->
+
+
+  <top-nav>
+    <div>
+      <row class="xxs logo">
+        <a href="https://adm.otkli.cc" alt='Главная cтраница'><img src="https://static.otkli.cc/svg/logoimg.svg" alt="Логотип otkli.cc" class="logoimg"></a>
+        <a href="https://adm.otkli.cc" alt='Главная cтраница' class="hide-m"><img src="https://static.otkli.cc/svg/logotext.svg" alt="Текст логотипа otkli.cc" class="logotext"></a>
+      </row>
+      <row class="xs">
+      </row>
+    </div>
+  </top-nav>
+  <bottom-nav>
+  </bottom-nav>
+
+  <div id="myProgress">
+    <div id="myBar"></div>
+  </div>
+  <main>
+    <column class="m vac-full">
+      <column class="xs" style="align-items: flex-end;">
+        <input type="text" placeholder="Кого ищете?" autocomplete="off" data-target="edit_vac" data-parent="vacancy_card" data-id="title">
+      </column>
+      <textarea-parent>
+        <textarea maxlength="500" placeholder="Био" data-target="edit_vac" data-parent="vacancy_card" data-id="about"></textarea>
+        <span></span>
+      </textarea-parent>
+
+      <column class="xs demands" style="align-items: flex-end;">
+        <textarea-parent>
+          <textarea maxlength="500" placeholder="Требование" data-parent="demands" data-target="edit_vac" data-id=""></textarea>
+          <span></span>
+        </textarea-parent>
+        <dropdown class="small">
+          <search class="i-tag" data-target="metatags">
+            <input type="text" placeholder="Метатег" data-autocomplete="true" autocomplete="off" data-id="" data-target="metatags"  data-parent="metatags">
+          </search>
+        </dropdown>
+      </column>
+
+      <column class="xs terms" style="align-items: flex-end;">
+        <textarea-parent>
+          <textarea maxlength="500" placeholder="Условия" data-parent="terms" data-target="edit_vac" data-id=""></textarea>
+          <span></span>
+        </textarea-parent>
+      </column>
+
+
+      <inline class="s" style="text-align:left;">
+        <label tabindex="0">
+          <input type="radio" name="experience" value=10 data-type="integer" data-target="edit_vac" data-parent="vacancy_card" data-id="experience">
+          <tag-s class="checkbox-purp button-gray-dark">
+            <p>Начинающий</p>
+          </tag-s>
+        </label>
+        <label tabindex="0">
+          <input type="radio" name="experience" value=20 data-type="integer" data-target="edit_vac" data-parent="vacancy_card" data-id="experience">
+          <tag-s class="checkbox-purp button-gray-dark">
+            <p>Уверенный</p>
+          </tag-s>
+        </label>
+        <label tabindex="0">
+          <input type="radio" name="experience" value=30 data-type="integer" data-target="edit_vac" data-parent="vacancy_card" data-id="experience">
+          <tag-s class="checkbox-purp button-gray-dark">
+            <p>Опытный</p>
+          </tag-s>
+        </label>
+      </inline>
+
+      <inline class="s" style="text-align:left;">
+        <label tabindex="0">
+          <input type="radio" name="busyness" value=10 data-type="integer" data-target="edit_vac" data-parent="vacancy_card" data-id="busyness">
+          <tag-s class="checkbox-purp button-gray-dark">
+            <p>Полная</p>
+          </tag-s>
+        </label>
+        <label tabindex="0">
+          <input type="radio" name="busyness" value=20 data-type="integer" data-target="edit_vac" data-parent="vacancy_card" data-id="busyness">
+          <tag-s class="checkbox-purp button-gray-dark">
+            <p>Частичная</p>
+          </tag-s>
+        </label>
+        <label tabindex="0">
+          <input type="radio" name="busyness" value=30 data-type="integer" data-target="edit_vac" data-parent="vacancy_card" data-id="busyness">
+          <tag-s class="checkbox-purp button-gray-dark">
+            <p>Проектная</p>
+          </tag-s>
+        </label>
+        <label tabindex="0">
+          <input type="radio" name="busyness" value=40 data-type="integer" data-target="edit_vac" data-parent="vacancy_card" data-id="busyness">
+          <tag-s class="checkbox-purp button-gray-dark">
+            <p>Стажировка</p>
+          </tag-s>
+        </label>
+      </inline>
+
+      <inline class="s" style="text-align:left;">
+        <label tabindex="0">
+          <input type="radio" name="term" value=10 data-type="integer" data-target="edit_vac" data-parent="vacancy_card" data-id="term">
+          <tag-s class="checkbox-purp button-gray-dark">
+            <p>В месяц</p>
+          </tag-s>
+        </label>
+        <label tabindex="0">
+          <input type="radio" name="term" value=20 data-type="integer" data-target="edit_vac" data-parent="vacancy_card" data-id="term">
+          <tag-s class="checkbox-purp button-gray-dark">
+            <p>В год</p>
+          </tag-s>
+        </label>
+        <label tabindex="0">
+          <input type="radio" name="term" value=30 data-type="integer" data-target="edit_vac" data-parent="vacancy_card" data-id="term">
+          <tag-s class="checkbox-purp button-gray-dark">
+            <p>За проект</p>
+          </tag-s>
+        </label>
+      </inline>
+
+      <inline class="s" style="text-align:left;">
+        <label tabindex="0">
+          <input type="radio" name="currency" value="RUB" data-target="edit_vac" data-parent="vacancy_card" data-id="currency">
+          <tag-s class="checkbox-purp button-gray-dark">
+            <p>RUB</p>
+          </tag-s>
+        </label>
+        <label tabindex="0">
+          <input type="radio" name="currency" value="USD" data-target="edit_vac" data-parent="vacancy_card" data-id="currency">
+          <tag-s class="checkbox-purp button-gray-dark">
+            <p>USD</p>
+          </tag-s>
+        </label>
+        <label tabindex="0">
+          <input type="radio" name="currency" value="EUR" data-target="edit_vac" data-parent="vacancy_card" data-id="currency">
+          <tag-s class="checkbox-purp button-gray-dark">
+            <p>EUR</p>
+          </tag-s>
+        </label>
+      </inline>
+
+      <row class="m double">
+        <input type="digit" placeholder="ЗП от" data-type="integer" data-target="edit_vac" data-parent="vacancy_card" data-id="salary_lo">
+        <input type="digit" placeholder="ЗП до" data-type="integer" data-target="edit_vac" data-parent="vacancy_card" data-id="salary_hi">
+        <input type="digit" placeholder="Дедлайн" data-type="integer" data-target="edit_vac" data-parent="vacancy_card" data-id="leave_days">
+      </row>
+      <hr>
+      <dropdown class="small">
+        <search class="i-dog" data-target="vac_viewer_list">
+          <input type="text" placeholder="Viewer" name="jobtitle" data-type="array" data-autocomplete="false" autocomplete="off" data-id="vac_viewer_list">
+        </search>
+      </dropdown>
+      <dropdown class="small">
+        <search class="i-dog" data-target="vac_owner_list">
+          <input type="text" placeholder="Owner" name="jobtitle" data-type="array" data-autocomplete="false" autocomplete="off" data-id="vac_owner_list">
+        </search>
+      </dropdown>
+      <dropdown class="small">
+        <search class="i-pin" data-target="geos">
+          <input type="text" placeholder="Город" name="geos" data-type="array" data-autocomplete="true" autocomplete="off" data-id="geos">
+        </search>
+        <dropdown-content id="geos">
+          <checkbox-parent>
+            <label tabindex="0">
+              <input type="checkbox" data-target="geos" data-id="geos" data-type="array" data-val="Удаленка" onclick="checkboxTag(this);">
+              <tag-xs class="checkbox-purp button-gray-dark">
+                <p>Удаленка</p>
+              </tag-xs>
+            </label>
+            <label tabindex="0">
+              <input type="checkbox" data-target="geos" data-id="geos"  data-type="array" data-val="Москва" onclick="checkboxTag(this);">
+              <tag-xs class="checkbox-purp button-gray-dark">
+                <p>Москва</p>
+              </tag-xs>
+            </label>
+            <label tabindex="0">
+              <input type="checkbox" data-target="geos" data-id="geos" data-type="array" data-val="Санкт-Петербург" onclick="checkboxTag(this);">
+              <tag-xs class="checkbox-purp button-gray-dark">
+                <p>Санкт-Петербург</p>
+              </tag-xs>
+            </label>
+          </checkbox-parent>
+        </dropdown-content>
+      </dropdown>
+      <dropdown class="small">
+        <search class="i-search" data-target="professions">
+          <input type="text" placeholder="Профессия" name="jobtitle" data-type="array" data-autocomplete="true" autocomplete="off" data-id="professions">
+        </search>
+      </dropdown>
+
+
+      <input type="hidden" data-target="edit_vac" data-parent="vacancy_card" data-id="status" data-type="integer" data-valid="true">
+      <input type="hidden" data-target="edit_vac" data-id="code" data-valid="true">
+
+      <hr>
+
+      <row class="m double">
+        <tag-l class="button-gray-contrast" tabindex="0" onclick="toDecline();">
+          <p>Отклонить</p>
+        </tag-l>
+        <tag-l class="button-purp-contrast" tabindex="0" onclick="toAccept();">
+          <p>Опубликовать</p>
+        </tag-l>
+      </row>
+
+    </column>
+
+
+
+
+
+    <pre>
+    </pre>
+  </main>
+
+  <footer>
+
+  </footer>
+
+
+</body>
+
+<script src="https://static.otkli.cc/js/vars.js"></script>
+<script src="https://static.otkli.cc/js/scrolllockAndOverlay.js" defer></script>
+
+<script src="https://static.otkli.cc/js/AJAX.js" defer></script>
+<script src="https://static.otkli.cc/js/crawler.js" defer></script>
+
+<script src="https://static.otkli.cc/js/scripts.js" defer></script>
+<script src="https://static.otkli.cc/js/elements.js" defer></script>
+<script src="https://static.otkli.cc/js/auth.js" defer></script>
+
+<script src="https://static.otkli.cc/js/render/adm.otkli.cc/navbars.js" defer></script>
+<script src="https://static.otkli.cc/js/render/adm.otkli.cc/authform.js" defer></script>
+<script src="https://static.otkli.cc/js/render/edit/vacancy_adm.js" defer></script>
+
+<script src="https://static.otkli.cc/js/autocomplete_new.js" defer></script>
+<script src="https://static.otkli.cc/js/tagify.js" defer></script>
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://static.otkli.cc/js/googleauth.js" defer></script>
+
+</html>
