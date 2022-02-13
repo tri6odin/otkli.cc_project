@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script type="text/javascript">
+
+    json_var = `
+
+`;
+
+    async function testapi(json_body) {
+      var response = await fetch('https://proxy.otkli.cc/v1.0/groups/', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ___'
+        },
+        body: json_body
+      });
+      JSON.stringify(await response.json())
+      console.log(response.status);
+    }
+
+    let lofname
+    for (const [key, value] of Object.entries(JSON.parse(json_var))) {
+      for (const [key_child, value_child] of Object.entries(value.vacs)) {
+        json_body = `
+          {
+          	"group":"geos",
+          	"parent_val":"` + value.val + `",
+          	"child_val":"` + value_child.val + `",
+            "syn":"` + value_child.val + `"
+          }
+          `
+
+        testapi(json_body)
+      }
+    }
+  </script>
+</head>
+
+<body>
+</body>
+
+</html>
