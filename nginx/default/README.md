@@ -213,6 +213,7 @@ nginx -t
 systemctl restart nginx
 ```
 ### Server blocks
+
 Remove default server block
 ```
 rm /etc/nginx/sites-available/default
@@ -255,7 +256,7 @@ server
   }
 }
 ```
-Create server block config for grab metrics
+[Examples of server blocks](https://github.com/tri6odin/otkli.cc_project/tree/main/nginx/default/blocks) used in our project 
 ```
 nano /etc/nginx/sites-available/your_domain
 ```
