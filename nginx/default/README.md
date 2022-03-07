@@ -53,11 +53,7 @@ wget https://github.com/prometheus/node_exporter/releases/download/v1.3.1/node_e
 tar -xvzf node_exporter-1.3.1.linux-amd64.tar.gz
 cp node_exporter-1.3.1.linux-amd64/node_exporter /usr/local/bin/
 ```
-Create service file:
-```
-nano /etc/systemd/system/node_exporter.service
-```
-And paste:
+Create service file: `nano /etc/systemd/system/node_exporter.service` and paste:
 ```
 [Unit]
 Description=Node Exporter
@@ -101,10 +97,7 @@ apt install libmaxminddb0 libmaxminddb-dev mmdb-bin
 apt install geoipupdate
 ```
 You need to create an account on the [MaxMind website](https://www.maxmind.com/) which provides these databases. After registering on the site, you can now generate new license key.
-In the /etc/GeoIP.conf file, you can now replace YOUR_ACCOUNT_ID_HERE and YOUR_LICENSE_KEY_HERE:
-```
-nano /etc/GeoIP.conf
-```
+In the /etc/GeoIP.conf file, you can now replace `YOUR_ACCOUNT_ID_HERE` and `YOUR_LICENSE_KEY_HERE` in conf file `nano /etc/GeoIP.conf`.
 After that, you will be able to update the geoip database:
 ```
 geoipupdate
@@ -156,11 +149,7 @@ mv ngx_http_geoip2_module.so /usr/share/nginx/modules
 mv ngx_http_vhost_traffic_status_module.so /usr/share/nginx/modules
 ```
 ## Configure Nginx
-Open conf file:
-```
-nano /etc/nginx/nginx.conf
-```
-Рaste to root section:
+Open conf file `nano /etc/nginx/nginx.conf` and paste to root section:
 ```
 load_module modules/ngx_http_brotli_filter_module.so;
 load_module modules/ngx_http_brotli_static_module.so;
@@ -225,11 +214,7 @@ mkdir -p /var/www/your_domain/html
 chown -R $USER:$USER /var/www/your_domain/html
 chmod -R 755 /var/www/your_domain
 ```
-Create server block config for grab metrics
-```
-nano /etc/nginx/sites-available/status.your_domain
-```
-And paste
+Create server block config for grab metrics `nano /etc/nginx/sites-available/status.your_domain` and paste
 ```
 server
 {
@@ -257,10 +242,7 @@ server
 }
 ```
 You can use the [server blocks of our project](https://github.com/tri6odin/otkli.cc_project/tree/main/nginx/default/blocks), or create a default
-```
-nano /etc/nginx/sites-available/your_domain
-```
-And paste
+`nano /etc/nginx/sites-available/your_domain` and paste
 ```
 server {
         root /var/www/your_domain/html;
@@ -293,11 +275,7 @@ certbot --nginx -d your_domain -d status.your_domain
 certbot renew --dry-run
 ```
 ### TLS1.3 HTTP2
-Open the configuration file for your domain:
-```
-nano /etc/nginx/sites-available/your_domain
-```
-And add **http2**
+Open the configuration file for your domain `nano /etc/nginx/sites-available/your_domain` and add `http2`
 ```
 listen [::]:443 ssl http2 ipv6only=on; 
 listen 443 ssl http2; 
