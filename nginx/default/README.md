@@ -256,7 +256,7 @@ server
   }
 }
 ```
-[Examples of server blocks](https://github.com/tri6odin/otkli.cc_project/tree/main/nginx/default/blocks) used in our project 
+You can use the [server blocks of our project](https://github.com/tri6odin/otkli.cc_project/tree/main/nginx/default/blocks), or create a default
 ```
 nano /etc/nginx/sites-available/your_domain
 ```
