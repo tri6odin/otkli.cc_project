@@ -40,11 +40,7 @@ sudo chown -R prometheus:prometheus /etc/prometheus
 sudo mkdir /var/lib/prometheus
 sudo chown prometheus:prometheus /var/lib/prometheus
 ```
-Create service file:
-```
-nano /etc/systemd/system/prometheus.service
-```
-And paste:
+Create service file `nano /etc/systemd/system/prometheus.service` and paste:
 ```
 [Unit]
 Description=Prometheus
@@ -70,11 +66,7 @@ sudo systemctl start prometheus
 sudo systemctl status prometheus
 sudo systemctl enable prometheus
 ```
-Edit config:
-```
-nano /etc/prometheus/prometheus.yml
-```
-And paste:
+Edit config `nano /etc/prometheus/prometheus.yml` and paste:
 ```
 - job_name: 'frontend_vts'
   scheme: https
@@ -141,11 +133,7 @@ Install Nginx:
 ```
 sudo apt install nginx
 ```
-Create Prometheus block:
-```
-nano /etc/nginx/sites-available/prometheus.otkli.cc
-```
-And paste:
+Create Prometheus block `nano /etc/nginx/sites-available/prometheus.otkli.cc` and paste:
 ```
 server {
   #IP of monitoring server
@@ -160,11 +148,7 @@ server {
     }
 }
 ```
-Create Grafana block:
-```
-nano /etc/nginx/sites-available/grafana.otkli.cc
-```
-And paste:
+Create Grafana block `nano /etc/nginx/sites-available/grafana.otkli.cc` and paste:
 ```
 server {
   #IP of monitoring server
