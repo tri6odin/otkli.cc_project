@@ -208,12 +208,17 @@ Remove default server block
 ```
 rm /etc/nginx/sites-available/default
 rm /etc/nginx/sites-enabled/default
+rm -rf var/www/html
 ```
-Create new server blocks
+Create new server blocks and add permission
 ```
 mkdir -p /var/www/your_domain/html
 chown -R $USER:$USER /var/www/your_domain/html
 chmod -R 755 /var/www/your_domain
+```
+If you use php operation with read/write files, you need to take permission
+```
+chown -R www-data:www-data your_directory
 ```
 Create server block config for grab metrics `nano /etc/nginx/sites-available/status.your_domain` and paste. Instructions on how to set up a [metrics server](https://github.com/tri6odin/otkli.cc_project/tree/main/nginx/metrics) and [VPN](https://github.com/tri6odin/algo)
 ```
