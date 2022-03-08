@@ -180,7 +180,8 @@ map $http_user_agent $filter_user_agent {
   default 'unknown';
   ~iPhone ios;
   ~Android android;
-  ~(MSIE|Mozilla) windows;
+  ~Windows windows;
+  ~Macintosh mac;
 }
 
 vhost_traffic_status_filter_by_set_key $filter_user_agent agent::*;
