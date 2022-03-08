@@ -215,11 +215,11 @@ mkdir -p /var/www/your_domain/html
 chown -R $USER:$USER /var/www/your_domain/html
 chmod -R 755 /var/www/your_domain
 ```
-Create server block config for grab metrics `nano /etc/nginx/sites-available/status.your_domain` and paste
+Create server block config for grab metrics `nano /etc/nginx/sites-available/status.your_domain` and paste. Instructions on how to set up a [metrics server](https://github.com/tri6odin/otkli.cc_project/tree/main/nginx/metrics) and [VPN](https://github.com/tri6odin/algo)
 ```
 server
 {
-  #IP of your monitoring server
+  #IP of your metrics server
   allow 1.1.1.1;
   #IP of your VPN
   allow 1.1.1.1;
