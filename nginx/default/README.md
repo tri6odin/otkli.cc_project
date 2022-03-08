@@ -208,7 +208,7 @@ Remove default server block
 ```
 rm /etc/nginx/sites-available/default
 rm /etc/nginx/sites-enabled/default
-rm -rf var/www/html
+rm -rf /var/www/html
 ```
 Create new server blocks and add permission
 ```
