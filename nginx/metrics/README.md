@@ -181,9 +181,11 @@ sudo systemctl enable nginx
 ```
 ## Final checklist
 ### Fail2Ban
+```
 systemctl restart fail2ban
 systemctl status fail2ban
 systemctl enable fail2ban
+```
 ### Nginx
 ```
 nginx -t
