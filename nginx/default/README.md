@@ -131,6 +131,11 @@ If php read/write files, u need to take permission
 ```
 chown -R www-data:www-data your_directory
 ```
+Edit filesize `nano /etc/php/7.4/fpm/php.ini` ann press `CTRL + W` for fast search:
+```
+upload_max_filesize = 10M
+post_max_size = 10M
+```
 ### RE-Compile Nginx with modules
 ```
 cd /tmp
@@ -219,6 +224,11 @@ chmod -R 755 /var/www/your_domain
 If you use php operation with read/write files, you need to take permission
 ```
 chown -R www-data:www-data your_directory
+```
+Edit filesize `nano /etc/php/7.4/fpm/php.ini` ann press `CTRL + W` for fast search:
+```
+upload_max_filesize = 10M
+post_max_size = 10M
 ```
 Create server block config for grab metrics `nano /etc/nginx/sites-available/status.your_domain` and paste. Instructions on how to set up a [metrics server](https://github.com/tri6odin/otkli.cc_project/tree/main/nginx/metrics) and [VPN](https://github.com/tri6odin/algo)
 ```
