@@ -306,9 +306,11 @@ ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH
 
 ## Final checklist
 ### Fail2Ban
+```
 systemctl restart fail2ban
 systemctl status fail2ban
 systemctl enable fail2ban
+```
 ### Nginx
 ```
 nginx -t
