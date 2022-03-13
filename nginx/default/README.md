@@ -21,6 +21,7 @@ Nice little things: TLS1.3, HTTP2, Fail2Ban, hidden Nginx version in response he
   * [SSl](#ssl)
     + [TLS1.3 HTTP2](#tls13-http2)
   * [Final checklist](#final-checklist)
+    + [Fail2Ban](#fail2ban)
     + [Nginx](#nginx)
     + [PHP-FPM](#php-fpm-1)
     + [HTTP2 check](#http2-check)
