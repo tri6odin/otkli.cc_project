@@ -304,6 +304,10 @@ ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH
 
 
 ## Final checklist
+### Fail2Ban
+systemctl restart fail2ban
+systemctl status fail2ban
+systemctl enable fail2ban
 ### Nginx
 ```
 nginx -t
@@ -313,6 +317,10 @@ systemctl enable nginx
 ```
 ### PHP-FPM
 ```
+sudo /etc/init.d/php7.4-fpm restart
+systemctl restart php7.4-fpm
+systemctl status php7.4-fpm
+systemctl enable php7.4-fpm
 ```
 ### HTTP2 check
 ```
@@ -331,6 +339,9 @@ curl -IL https://status.your_domain -H "Accept-Encoding: br"
 ```
 ### Node exporter check
 ```
+systemctl restart node_exporter
+systemctl status node_exporter
+systemctl enable node_exporter
 curl https://status.your_domain/node_metricks
 ```
 ### VTS check
