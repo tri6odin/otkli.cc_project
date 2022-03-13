@@ -3,6 +3,7 @@
   * [Prometheus](#prometheus)
   * [Grafana](#grafana)
   * [Nginx](#nginx)
+  * [Final checklist](#final-checklist)
 ## First steps
 Go root:
 ```
