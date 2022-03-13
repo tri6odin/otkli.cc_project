@@ -126,7 +126,7 @@ apt install nginx
 apt install php-fpm
 apt-get install php7.4-gd
 apt-get install php7.4-curl
-sudo /etc/init.d/php7.4-fpm restart
+systemctl restart php7.4-fpm
 ```
 If php read/write files, u need to take permission
 ```
@@ -320,7 +320,6 @@ systemctl enable nginx
 ```
 ### PHP-FPM
 ```
-sudo /etc/init.d/php7.4-fpm restart
 systemctl restart php7.4-fpm
 systemctl status php7.4-fpm
 systemctl enable php7.4-fpm
