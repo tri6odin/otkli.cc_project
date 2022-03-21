@@ -1,9 +1,18 @@
 # Metrics server configuration
+# Table of contents
   * [First steps](#first-steps)
   * [Prometheus](#prometheus)
   * [Grafana](#grafana)
   * [Nginx](#nginx)
+    + [Edit server blocks](#edit-server-blocks)
+    + [SSl](#ssl)
+    + [TLS1.3 HTTP2](#tls13-http2)
+    + [Restart nginx](#restart-nginx)
   * [Final checklist](#final-checklist)
+    + [Fail2Ban](#fail2ban)
+    + [Nginx](#nginx-1)
+    + [Prometheus](#prometheus-1)
+    + [Grafana](#grafana-1)
 ## First steps
 Go root:
 ```
@@ -134,50 +143,67 @@ Install Nginx:
 ```
 sudo apt install nginx
 ```
-Create Prometheus block `nano /etc/nginx/sites-available/prometheus.otkli.cc` and paste:
+### Edit server blocks
+Remove default server block
+```
+rm /etc/nginx/sites-available/default
+rm /etc/nginx/sites-enabled/default
+rm -rf /var/www/html
+```
+Don't forget to change `your_domain` name.  
+Create Prometheus block `nano /etc/nginx/sites-available/prometheus.your_domain` and paste:
 ```
 server {
   #IP of monitoring server
-  allow 3.70.142.178;
+  allow grafana.your_domain;
   #IP of VPN
-  allow 3.66.126.220;
+  allow vpn.your_domain;
   deny all;
-  server_name prometheus.otkli.cc;
+  server_name prometheus.your_domain;
   location /
     {
       proxy_pass http://localhost:9090;
     }
 }
 ```
-Create Grafana block `nano /etc/nginx/sites-available/grafana.otkli.cc` and paste:
+Create Grafana block `nano /etc/nginx/sites-available/grafana.your_domain` and paste:
 ```
 server {
-  #IP of monitoring server
-  allow 3.70.142.178;
   #IP of VPN
-  allow 3.66.126.220;
+  allow vpn.your_domain;
   deny all;
-  server_name grafana.otkli.cc;
+  server_name grafana.your_domain;
   location /
     {
       proxy_pass http://localhost:3000;
     }
 }
 ```
+### SSl
 Let's Encrypt SSL for Nginx:
 ```
 apt install certbot python3-certbot-nginx
 ```
 Generate SSL config in block:
 ```
-certbot --nginx -d grafana.otkli.cc -d prometheus.otkli.cc
+certbot --nginx -d grafana.your_domain -d prometheus.your_domain
+certbot renew --dry-run
 ```
-Start Nginx:
+### TLS1.3 HTTP2
+Open the configuration file for your domains `nano /etc/nginx/sites-available/prometheus.your_domain` and add `http2`
+```
+listen [::]:443 ssl http2 ipv6only=on; 
+listen 443 ssl http2; 
+```
+Locate the line that includes the options-ssl-nginx.conf file and comment it out:
+```
+#include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
+```
+### Restart nginx
 ```
 nginx -t
-sudo systemctl start nginx
-sudo systemctl status nginx
-sudo systemctl enable nginx
+systemctl restart nginx
 ```
 ## Final checklist
 ### Fail2Ban
@@ -192,6 +218,10 @@ nginx -t
 systemctl restart nginx
 systemctl status nginx
 systemctl enable nginx
+```
+### SSL renew check
+```
+certbot renew --dry-run
 ```
 ### Prometheus
 ```
