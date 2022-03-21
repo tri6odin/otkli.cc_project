@@ -16,12 +16,12 @@ Metrics are collected by [Prometheus](https://github.com/prometheus/prometheus) 
     + [Nginx VTS](#nginx-vts)
     + [GeoIP](#geoip)
   * [Install Nginx](#install-nginx)
-    + [PHP-FPM](#php-fpm)
     + [RE-Compile Nginx with modules](#re-compile-nginx-with-modules)
     + [Configure Nginx](#configure-nginx)
     + [Edit server blocks](#edit-server-blocks)
     + [SSl](#ssl)
     + [TLS1.3 HTTP2](#tls13-http2)
+    + [PHP-FPM](#php-fpm)
     + [Restart Nginx](#restart-nginx)
   * [Final checklist](#final-checklist)
     + [Fail2Ban check](#fail2ban-check)
@@ -125,22 +125,6 @@ git clone https://github.com/leev/ngx_http_geoip2_module.git
 ```
 apt install nginx
 ```
-### PHP-FPM
-```
-apt install php-fpm
-apt-get install php7.4-gd
-apt-get install php7.4-curl
-systemctl restart php7.4-fpm
-```
-If php read/write files, u need to take permission
-```
-chown -R www-data:www-data your_directory
-```
-Edit filesize `nano /etc/php/7.4/fpm/php.ini` ann press `CTRL + W` for fast search:
-```
-upload_max_filesize = 10M
-post_max_size = 10M
-```
 ### RE-Compile Nginx with modules
 ```
 cd /tmp
@@ -226,23 +210,14 @@ mkdir -p /var/www/your_domain/html
 chown -R $USER:$USER /var/www/your_domain/html
 chmod -R 755 /var/www/your_domain
 ```
-If you use php operation with read/write files, you need to take permission
-```
-chown -R www-data:www-data your_directory
-```
-Edit filesize `nano /etc/php/7.4/fpm/php.ini` ann press `CTRL + W` for fast search:
-```
-upload_max_filesize = 10M
-post_max_size = 10M
-```
 Create server block config for grab metrics `nano /etc/nginx/sites-available/status.your_domain` and paste. Instructions on how to set up a [metrics server](https://github.com/tri6odin/otkli.cc_project/tree/main/nginx/metrics) and [VPN](https://github.com/tri6odin/algo)
 ```
 server
 {
   #IP of your metrics server
-  allow 1.1.1.1;
+  allow prometheus.your_domain;
   #IP of your VPN
-  allow 1.1.1.1;
+  allow vpn.your_domain;
   deny all;
   
   server_name status.your_domain;
@@ -262,8 +237,8 @@ server
   }
 }
 ```
-You can use the [server blocks of our project](https://github.com/tri6odin/otkli.cc_project/tree/main/nginx/default/blocks), or create a default
-`nano /etc/nginx/sites-available/your_domain` and paste
+Production configurations can be found here: [server blocks of our project](https://github.com/tri6odin/otkli.cc_project/tree/main/nginx/default/blocks)  
+Or create a default `nano /etc/nginx/sites-available/your_domain` and paste:
 ```
 server {
         root /var/www/your_domain/html;
@@ -305,6 +280,22 @@ Locate the line that includes the options-ssl-nginx.conf file and comment it out
 ```
 #include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
 ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
+```
+### PHP-FPM
+```
+apt install php-fpm
+apt-get install php7.4-gd
+apt-get install php7.4-curl
+systemctl restart php7.4-fpm
+```
+If php read/write files, u need to take permission
+```
+chown -R www-data:www-data your_directory
+```
+Edit filesize `nano /etc/php/7.4/fpm/php.ini` ann press `CTRL + W` for fast search:
+```
+upload_max_filesize = 10M
+post_max_size = 10M
 ```
 ### Restart nginx
 ```
