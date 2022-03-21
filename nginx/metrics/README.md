@@ -76,7 +76,9 @@ sudo systemctl start prometheus
 sudo systemctl status prometheus
 sudo systemctl enable prometheus
 ```
-Production configurations can be found here: [prometheus config of our project](https://github.com/tri6odin/otkli.cc_project/blob/main/nginx/metrics/prometheus/prometheus.yml) 
+>
+>Production configurations can be found here: [prometheus config of our project](https://github.com/tri6odin/otkli.cc_project/blob/main/nginx/metrics/prometheus/prometheus.yml)  
+>
 Edit config `nano /etc/prometheus/prometheus.yml` and paste:
 ```
 - job_name: 'your_domain_vts'
@@ -130,9 +132,9 @@ rm /etc/nginx/sites-available/default
 rm /etc/nginx/sites-enabled/default
 rm -rf /var/www/html
 ```
- 
-Production configurations can be found here: [server blocks of our project](https://github.com/tri6odin/otkli.cc_project/tree/main/nginx/metrics/blocks) 
-
+>
+>Production configurations can be found here: [server blocks of our project](https://github.com/tri6odin/otkli.cc_project/tree/main/nginx/metrics/blocks) 
+>
 Don't forget to change `your_domain` name. Create Prometheus block `nano /etc/nginx/sites-available/prometheus.your_domain` and paste:
 ```
 server {
