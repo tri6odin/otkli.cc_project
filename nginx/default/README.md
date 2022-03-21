@@ -185,6 +185,16 @@ vhost_traffic_status_filter_by_set_key $geoip2_data_country_code country::*;
 #vhost_traffic_status_filter_by_set_key $vts_2xx_counter 2xx::$server_name;
 #vhost_traffic_status_filter_by_set_key $host host::$server_name;
 
+#vhost_traffic_status_limit_traffic in:64G;
+#vhost_traffic_status_limit_traffic out:1024G;
+
+#vhost_traffic_status_filter_by_set_key $geoip_country_code country::$server_name;
+#vhost_traffic_status_limit_traffic_by_set_key FG@country::$server_name@US out:0;
+#vhost_traffic_status_limit_traffic_by_set_key FG@country::$server_name@CN out:0;
+
+#vhost_traffic_status_limit_traffic_by_set_key UG@backend@10.10.10.17:80 in:512G;
+#vhost_traffic_status_limit_traffic_by_set_key UG@backend@10.10.10.18:80 in:1024G;
+
 # Nginx Brotli module
 brotli_static on;
 brotli on;
