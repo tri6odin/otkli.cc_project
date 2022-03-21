@@ -281,6 +281,7 @@ Locate the line that includes the options-ssl-nginx.conf file and comment it out
 #include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
 ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
 ```
+Repeat this step for each server block.
 ### PHP-FPM
 ```
 apt install php-fpm
