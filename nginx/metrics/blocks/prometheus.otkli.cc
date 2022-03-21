@@ -1,5 +1,5 @@
 server {
-  #IP of monitoring server
+  #IP of grafana server
   allow 3.70.142.178;
   #IP of VPN
   allow 3.66.126.220;
