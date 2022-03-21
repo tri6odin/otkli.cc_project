@@ -9,19 +9,20 @@ Metrics are collected by [Prometheus](https://github.com/prometheus/prometheus) 
 
 # Table of contents
   * [First steps](#first-steps)
+  * [Install dependencies](#install-dependencies)
   * [Node Exporter](#node-exporter)
   * [Nginx modules](#nginx-modules)
     + [Brotli](#brotli)
     + [Nginx VTS](#nginx-vts)
     + [GeoIP](#geoip)
-  * [Install dependencies](#install-dependencies)
   * [Install Nginx](#install-nginx)
     + [PHP-FPM](#php-fpm)
     + [RE-Compile Nginx with modules](#re-compile-nginx-with-modules)
-  * [Configure Nginx](#configure-nginx)
-    + [Server blocks](#server-blocks)
-  * [SSl](#ssl)
+    + [Configure Nginx](#configure-nginx)
+    + [Edit server blocks](#edit-server-blocks)
+    + [SSl](#ssl)
     + [TLS1.3 HTTP2](#tls13-http2)
+    + [Restart Nginx](#restart-nginx)
   * [Final checklist](#final-checklist)
     + [Fail2Ban check](#fail2ban-check)
     + [Nginx check](#nginx-check)
@@ -44,6 +45,15 @@ hostnamectl set-hostname ___new_name___
 Install Fail2ban:
 ```
 apt-get install fail2ban
+```
+## Install dependencies
+C compiler
+```
+apt-get install build-essential
+```
+PCRE & Zlib & OpenSSL
+```
+apt install -y libpcre3 libpcre3-dev zlib1g zlib1g-dev openssl libssl-dev
 ```
 ## Node Exporter
 Add app user:
@@ -111,15 +121,6 @@ Download dynamic module:
 cd /tmp
 git clone https://github.com/leev/ngx_http_geoip2_module.git
 ```
-## Install dependencies
-C compiler
-```
-apt-get install build-essential
-```
-PCRE & Zlib & OpenSSL
-```
-apt install -y libpcre3 libpcre3-dev zlib1g zlib1g-dev openssl libssl-dev
-```
 ## Install Nginx
 ```
 apt install nginx
@@ -157,7 +158,7 @@ mv ngx_http_brotli_static_module.so /usr/share/nginx/modules
 mv ngx_http_geoip2_module.so /usr/share/nginx/modules
 mv ngx_http_vhost_traffic_status_module.so /usr/share/nginx/modules
 ```
-## Configure Nginx
+### Configure Nginx
 Open conf file `nano /etc/nginx/nginx.conf` and paste to root section:
 ```
 load_module modules/ngx_http_brotli_filter_module.so;
@@ -211,7 +212,7 @@ Restart nginx
 nginx -t
 systemctl restart nginx
 ```
-### Server blocks
+### Edit server blocks
 
 Remove default server block
 ```
@@ -284,7 +285,7 @@ ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
 ln -s /etc/nginx/sites-available/status.your_domain /etc/nginx/sites-enabled/
 ```
 
-## SSl
+### SSl
 Let's Encrypt SSL for Nginx:
 ```
 apt install certbot python3-certbot-nginx
@@ -305,7 +306,11 @@ Locate the line that includes the options-ssl-nginx.conf file and comment it out
 #include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
 ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
 ```
-
+### Restart nginx
+```
+nginx -t
+systemctl restart nginx
+```
 
 ## Final checklist
 ### Fail2Ban check
