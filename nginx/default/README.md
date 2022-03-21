@@ -2,7 +2,7 @@
 Nginx server with [VTS](https://github.com/vozlt/nginx-module-vts) (request/response metrics export), [GeoIP](https://github.com/leev/ngx_http_geoip2_module) (detecting countries and cities from which requests come) and [Brotli](https://github.com/google/ngx_brotli) (modern compression algorithm) modules.
 Nice little things: TLS1.3, HTTP2, Fail2Ban, hidden Nginx version in response headers for maximum security, and PHP-FPM.
 
-Metrics are collected by [Prometheus](https://github.com/prometheus/prometheus) and visualized by [Grafana](https://github.com/grafana/grafana) – [Server installation instruction](https://github.com/tri6odin/otkli.cc_project/tree/main/nginx/metrics).
+Metrics are collected by [Prometheus](https://github.com/prometheus/prometheus) and visualized by [Grafana](https://github.com/grafana/grafana) – [Metrics server configuration instruction](https://github.com/tri6odin/otkli.cc_project/tree/main/nginx/metrics).
 > Endpoint metrics server ([Node exporter](https://github.com/prometheus/node_exporter)) – `status.your_domain/node_metrics`  
 > Endpoint metrics Nginx (VTS exporter) – `status.your_domain/status/format/prometheus`
 
