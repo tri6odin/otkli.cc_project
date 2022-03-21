@@ -237,8 +237,10 @@ server
   }
 }
 ```
-Production configurations can be found here: [server blocks of our project](https://github.com/tri6odin/otkli.cc_project/tree/main/nginx/default/blocks)  
-Or create a default `nano /etc/nginx/sites-available/your_domain` and paste:
+>
+>Production configurations can be found here: [server blocks of our project](https://github.com/tri6odin/otkli.cc_project/tree/main/nginx/default/blocks)  
+>
+Create a default `nano /etc/nginx/sites-available/your_domain` and paste:
 ```
 server {
         root /var/www/your_domain/html;
