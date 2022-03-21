@@ -1,11 +1,13 @@
 # Default Nginx server 
-Nginx server with [VTS](https://github.com/vozlt/nginx-module-vts) (request/response metrics export), [GeoIP](https://github.com/leev/ngx_http_geoip2_module) (detecting countries and cities from which requests come) and [Brotli](https://github.com/google/ngx_brotli) (modern compression algorithm) modules. 
-Metrics are collected by [Prometheus](https://github.com/prometheus/prometheus) and visualized by [Grafana](https://github.com/grafana/grafana) – [⚙️Server installation instruction](https://github.com/tri6odin/otkli.cc_project/tree/main/nginx/metrics).
-* Ubuntu endpoint metrics ([Node exporter](https://github.com/prometheus/node_exporter)) – status.your_domain/node_metrics
-* Endpoint metrics Nginx (VTS exporter) – status.your_domain/status/format/prometheus
-
+Nginx server with [VTS](https://github.com/vozlt/nginx-module-vts) (request/response metrics export), [GeoIP](https://github.com/leev/ngx_http_geoip2_module) (detecting countries and cities from which requests come) and [Brotli](https://github.com/google/ngx_brotli) (modern compression algorithm) modules.
 Nice little things: TLS1.3, HTTP2, Fail2Ban, hidden Nginx version in response headers for maximum security, and PHP-FPM.
 
+Metrics are collected by [Prometheus](https://github.com/prometheus/prometheus) and visualized by [Grafana](https://github.com/grafana/grafana) – [Server installation instruction](https://github.com/tri6odin/otkli.cc_project/tree/main/nginx/metrics).
+> Endpoint metrics server ([Node exporter](https://github.com/prometheus/node_exporter)) – `status.your_domain/node_metrics`  
+> Endpoint metrics Nginx (VTS exporter) – `status.your_domain/status/format/prometheus`
+
+
+# Table of contents
   * [First steps](#first-steps)
   * [Node Exporter](#node-exporter)
   * [Nginx modules](#nginx-modules)
@@ -21,9 +23,10 @@ Nice little things: TLS1.3, HTTP2, Fail2Ban, hidden Nginx version in response he
   * [SSl](#ssl)
     + [TLS1.3 HTTP2](#tls13-http2)
   * [Final checklist](#final-checklist)
-    + [Fail2Ban](#fail2ban)
-    + [Nginx](#nginx)
-    + [PHP-FPM](#php-fpm-1)
+    + [Fail2Ban check](#fail2ban-check)
+    + [Nginx check](#nginx-check)
+    + [SSL renew check](#ssl-renew-check)
+    + [PHP-FPM check](#php-fpm-check)
     + [HTTP2 check](#http2-check)
     + [TLS1.3 check](#tls13-check)
     + [Brotli check](#brotli-check)
@@ -98,7 +101,7 @@ apt install libmaxminddb0 libmaxminddb-dev mmdb-bin
 apt install geoipupdate
 ```
 You need to create an account on the [MaxMind website](https://www.maxmind.com/) which provides these databases. After registering on the site, you can now generate new license key.
-In the /etc/GeoIP.conf file, you can now replace `YOUR_ACCOUNT_ID_HERE` and `YOUR_LICENSE_KEY_HERE` in conf file `nano /etc/GeoIP.conf`.
+Replace `YOUR_ACCOUNT_ID_HERE` and `YOUR_LICENSE_KEY_HERE` in conf file `nano /etc/GeoIP.conf`.
 After that, you will be able to update the geoip database:
 ```
 geoipupdate
@@ -305,20 +308,24 @@ ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH
 
 
 ## Final checklist
-### Fail2Ban
+### Fail2Ban check
 ```
 systemctl restart fail2ban
 systemctl status fail2ban
 systemctl enable fail2ban
 ```
-### Nginx
+### Nginx check
 ```
 nginx -t
 systemctl restart nginx
 systemctl status nginx
 systemctl enable nginx
 ```
-### PHP-FPM
+### SSL renew check
+```
+certbot renew --dry-run
+```
+### PHP-FPM check
 ```
 systemctl restart php7.4-fpm
 systemctl status php7.4-fpm
