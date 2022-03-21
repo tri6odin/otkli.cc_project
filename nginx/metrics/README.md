@@ -151,6 +151,7 @@ rm /etc/nginx/sites-enabled/default
 rm -rf /var/www/html
 ```
 Don't forget to change `your_domain` name.  
+Production configurations can be found here: [server blocks of our project](https://github.com/tri6odin/otkli.cc_project/tree/main/nginx/metrics/blocks)  
 Create Prometheus block `nano /etc/nginx/sites-available/prometheus.your_domain` and paste:
 ```
 server {
@@ -200,6 +201,7 @@ Locate the line that includes the options-ssl-nginx.conf file and comment it out
 #include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
 ssl_ciphers EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
 ```
+Repeat this step for each server block
 ### Restart nginx
 ```
 nginx -t
