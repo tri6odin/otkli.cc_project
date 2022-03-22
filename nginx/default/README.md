@@ -44,6 +44,7 @@ hostnamectl set-hostname ___new_name___
 ```
 Install Fail2ban:
 ```
+apt-get update
 apt-get install fail2ban
 ```
 ## Install dependencies
