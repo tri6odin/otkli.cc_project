@@ -273,7 +273,7 @@ ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
 ln -s /etc/nginx/sites-available/status.your_domain /etc/nginx/sites-enabled/
 ```
 
-### SSl
+### SSL
 Let's Encrypt SSL for Nginx:
 ```
 apt install certbot python3-certbot-nginx
