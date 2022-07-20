@@ -166,6 +166,9 @@ geoip2 /usr/share/GeoIP/GeoLite2-Country.mmdb {
     $geoip2_data_country_code country iso_code;
     $geoip2_data_country_name country names en;
 }
+geoip2 /usr/share/GeoIP/GeoLite2-City.mmdb {
+    $geoip2_data_city_name country names en;
+}
 
 fastcgi_param COUNTRY_CODE $geoip2_data_country_code;
 fastcgi_param COUNTRY_NAME $geoip2_data_country_name;
