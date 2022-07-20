@@ -6,4 +6,4 @@
 * [VPN server](https://github.com/tri6odin/algo)
 # DNS configuration
 * [Main domain](https://github.com/tri6odin/otkli.cc_project/tree/main/DNS/)
-
+# Fierwall configuration
