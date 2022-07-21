@@ -8,8 +8,9 @@ Metrics are collected by [Prometheus](https://github.com/prometheus/prometheus) 
 
 
 # Table of contents
-  * [First steps](#first-steps)
+    * [First steps](#first-steps)
   * [Install dependencies](#install-dependencies)
+  * [Postfix](#postfix)
   * [Node Exporter](#node-exporter)
   * [Nginx modules](#nginx-modules)
     + [Brotli](#brotli)
@@ -19,10 +20,10 @@ Metrics are collected by [Prometheus](https://github.com/prometheus/prometheus) 
     + [RE-Compile Nginx with modules](#re-compile-nginx-with-modules)
     + [Configure Nginx](#configure-nginx)
     + [Edit server blocks](#edit-server-blocks)
-    + [SSl](#ssl)
+    + [SSL](#ssl)
     + [TLS1.3 HTTP2](#tls13-http2)
     + [PHP-FPM](#php-fpm)
-    + [Restart Nginx](#restart-nginx)
+    + [Restart nginx](#restart-nginx)
   * [Final checklist](#final-checklist)
     + [Fail2Ban check](#fail2ban-check)
     + [Nginx check](#nginx-check)
@@ -33,6 +34,7 @@ Metrics are collected by [Prometheus](https://github.com/prometheus/prometheus) 
     + [Brotli check](#brotli-check)
     + [Node exporter check](#node-exporter-check)
     + [VTS check](#vts-check)
+    + [Postfix check](#postfix-check)
 ## First steps
 Go root:
 ```
@@ -47,6 +49,14 @@ Install Fail2ban:
 apt-get update
 apt-get install fail2ban
 ```
+Remove Sendmail:
+```
+apt-get purge sendmail*
+```
+Install Postfix
+```
+apt install postfix
+```
 ## Install dependencies
 C compiler
 ```
@@ -55,6 +65,34 @@ apt-get install build-essential
 PCRE & Zlib & OpenSSL
 ```
 apt install -y libpcre3 libpcre3-dev zlib1g zlib1g-dev openssl libssl-dev
+```
+## Postfix
+This configuration sends emails via Amazon SES
+```
+postconf -e "relayhost = [email-smtp.eu-central-1.amazonaws.com]:587" \
+"smtp_sasl_auth_enable = yes" \
+"smtp_sasl_security_options = noanonymous" \
+"smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd" \
+"smtp_use_tls = yes" \
+"smtp_tls_security_level = encrypt" \
+"smtp_tls_note_starttls_offer = yes"
+```
+Open conf file `nano /etc/postfix/sasl_passwd` and paste:
+```
+[email-smtp.eu-central-1.amazonaws.com]:587 AKIARI23VGNCQPP6SFPN:BCP6T0jknGe2txZFHRO39jYx2fnBmfo5u4QfwFuTe/4X
+```
+After save, create hash, change permission, and add cert:
+```
+postmap hash:/etc/postfix/sasl_passwd
+chown root:root /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
+chmod 0600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
+postconf -e 'smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt'
+```
+Start Postfix:
+```
+systemctl start postfix
+systemctl reload postfix
+systemctl enable postfix
 ```
 ## Node Exporter
 Add app user:
@@ -370,7 +408,17 @@ curl https://status.your_domain/node_metricks
 ```
 curl https://status.your_domain/status/format/prometheus
 ```
-
+### Postfix check
+Paste `crontab -e` and paste:
+```
+MAILTO=tri6odin@gmail.com
+@reboot echo "System start up"
+```
+And reboot server:
+```
+reboot
+```
+After that you get email from Amazon SES when server veen loaded.
 
 
 
