@@ -8,7 +8,7 @@ Metrics are collected by [Prometheus](https://github.com/prometheus/prometheus) 
 
 
 # Table of contents
-    * [First steps](#first-steps)
+  * [First steps](#first-steps)
   * [Install dependencies](#install-dependencies)
   * [Postfix](#postfix)
   * [Node Exporter](#node-exporter)
@@ -152,6 +152,10 @@ apt install geoipupdate
 You need to create an account on the [MaxMind website](https://www.maxmind.com/) which provides these databases. After registering on the site, you can now generate new license key.
 Replace `YOUR_ACCOUNT_ID_HERE` and `YOUR_LICENSE_KEY_HERE` in conf file `nano /etc/GeoIP.conf`.
 After that, you will be able to update the geoip database:
+```
+geoipupdate
+```
+And add CRON update, paste `crontab -e` and paste:
 ```
 geoipupdate
 ```
